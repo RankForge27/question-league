@@ -348,6 +348,103 @@ header {
 }
 
 /* =========================
+   MATERIAL QUESTION LOG
+========================= */
+
+.log-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    margin-top: 18px;
+}
+
+.log-field label {
+    display: block;
+    color: #a7a7b8;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.log-field input, .date-picker {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #343445;
+    background: #0f0f18;
+    color: white;
+    outline: none;
+}
+
+.log-field input:focus, .date-picker:focus {
+    border-color: #995aff;
+}
+
+.log-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.log-actions button, .record-actions button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 9px;
+    color: white;
+    font-weight: 700;
+}
+
+.save-log-btn { background: #8f4cff; }
+.cancel-log-btn { background: #303041; }
+.edit-log-btn { background: #35304a; }
+.delete-log-btn { background: #54252e; }
+
+.log-help {
+    color: #8f8fa0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.log-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.log-summary-tile {
+    background: #101019;
+    border: 1px solid #29293a;
+    border-radius: 12px;
+    padding: 13px;
+}
+
+.log-summary-label { color: #8f8fa0; font-size: 12px; margin-bottom: 5px; }
+.log-summary-value { color: #c39bff; font-size: 21px; font-weight: 800; overflow-wrap: anywhere; }
+
+.log-record {
+    padding: 15px 0;
+    border-bottom: 1px solid #292937;
+}
+.log-record:last-child { border-bottom: none; }
+.log-record-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+.log-record-name { font-weight: 700; overflow-wrap: anywhere; }
+.log-record-meta { color: #9292a5; font-size: 12px; margin-top: 5px; line-height: 1.5; }
+.log-record-count { color: #b57cff; font-weight: 800; white-space: nowrap; }
+.record-actions { display: flex; gap: 8px; margin-top: 10px; }
+.record-actions button { padding: 7px 10px; font-size: 12px; }
+.log-subheading { color: #b9b9c9; font-size: 14px; font-weight: 700; margin: 17px 0 8px; }
+.log-group-row { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid #252533; font-size: 13px; }
+.log-group-row span:first-child { overflow-wrap: anywhere; color: #bdbdca; }
+.log-group-row strong { white-space: nowrap; color: #b57cff; }
+
+/* =========================
    SECTIONS
 ========================= */
 
@@ -522,6 +619,10 @@ header {
     .target-settings {
         grid-template-columns: 1fr;
     }
+
+    .log-form-grid { grid-template-columns: 1fr; }
+    .log-summary-grid { grid-template-columns: 1fr; }
+    .log-record-top { flex-direction: column; }
 }
 </style>
 </head>
@@ -857,42 +958,56 @@ header {
 
 
         <!-- =================================================
-             ADD QUESTIONS
+             MATERIAL-WISE QUESTION LOG
         ================================================= -->
 
-        <div class="section">
-
-            <div class="section-heading">
-                Update Today's Questions
-            </div>
-
+        <div class="section" id="questionLogSection">
+            <div class="section-heading">📚 Log Your Practice</div>
             <div class="card">
+                <p class="log-help">Record each batch of questions once. Material names are custom, and subject/chapter are optional. Saved entries automatically update your dashboard and weekly leaderboard. No accuracy or correctness tracking is used.</p>
 
-                <div style="color:#8f8fa0;font-size:13px;">
-                    Enter how many questions you solved.
-                    This number will be added to today's total.
+                <div class="log-form-grid">
+                    <div class="log-field">
+                        <label for="logDate">Practice date</label>
+                        <input class="date-picker" type="date" id="logDate" required>
+                    </div>
+                    <div class="log-field">
+                        <label for="materialName">Material name *</label>
+                        <input type="text" id="materialName" maxlength="120" placeholder="e.g. Cengage, DPP, PYQs" required>
+                    </div>
+                    <div class="log-field">
+                        <label for="logSubject">Subject (optional)</label>
+                        <input type="text" id="logSubject" maxlength="100" placeholder="e.g. Physics">
+                    </div>
+                    <div class="log-field">
+                        <label for="logChapter">Chapter (optional)</label>
+                        <input type="text" id="logChapter" maxlength="160" placeholder="e.g. Laws of Motion">
+                    </div>
+                    <div class="log-field">
+                        <label for="logQuestions">Questions solved *</label>
+                        <input type="number" id="logQuestions" min="1" step="1" placeholder="e.g. 35" required>
+                    </div>
                 </div>
 
-                <div class="add-section">
-
-                    <input
-                        type="number"
-                        id="questionInput"
-                        min="1"
-                        placeholder="e.g. 50"
-                    >
-
-                    <button
-                        class="add-btn"
-                        onclick="addQuestions()"
-                    >
-                        + Add Questions
-                    </button>
-
+                <div class="log-actions">
+                    <button class="save-log-btn" id="saveLogButton" onclick="saveQuestionLog()">+ Save Entry</button>
+                    <button class="cancel-log-btn" id="cancelEditButton" onclick="cancelQuestionEdit()" style="display:none;">Cancel Edit</button>
                 </div>
-
+                <div id="logFormMessage" class="log-help" role="status" style="margin-top:12px;"></div>
             </div>
+        </div>
 
+        <div class="section" id="dateLogSection">
+            <div class="section-heading">🗓️ Daily Material History</div>
+            <div class="card">
+                <div class="log-field" style="max-width:260px;margin-bottom:18px;">
+                    <label for="historyDatePicker">View any date</label>
+                    <input class="date-picker" type="date" id="historyDatePicker" onchange="loadQuestionLogs()">
+                </div>
+                <div id="selectedDateSummary"></div>
+                <div id="questionLogList"><div class="loading">Loading question log...</div></div>
+                <div id="questionLogGroups"></div>
+            </div>
         </div>
 
 
@@ -1065,6 +1180,8 @@ let currentTargets = {
     weekly_target: 500,
     monthly_target: 2000
 };
+
+let editingQuestionLogId = null;
 
 
 /* =========================================================
@@ -1701,14 +1818,17 @@ async function loadTargets() {
 
 async function loadDashboard() {
 
+    const today = localDateString();
+    const logDateInput = document.getElementById("logDate");
+    const historyDateInput = document.getElementById("historyDatePicker");
+    if (logDateInput && !logDateInput.value) logDateInput.value = today;
+    if (historyDateInput && !historyDateInput.value) historyDateInput.value = today;
+
     await Promise.all([
-
         loadMyStats(),
-
         loadLeaderboard(),
-
-        loadHistory()
-
+        loadHistory(),
+        loadQuestionLogs()
     ]);
 
 }
@@ -1980,127 +2100,195 @@ function calculateStreak(stats) {
 
 
 /* =========================================================
-   ADD QUESTIONS
+   MATERIAL-WISE QUESTION LOG
+   New practice is recorded only in question_logs.
+   A database trigger synchronizes daily_stats for dashboard totals.
 ========================================================= */
 
-window.addQuestions = async function() {
+function setLogFormMessage(message, isError = false) {
+    const el = document.getElementById("logFormMessage");
+    el.textContent = message || "";
+    el.style.color = isError ? "#ff9da8" : "#8f8fa0";
+}
 
-    const input =
-        document.getElementById(
-            "questionInput"
-        );
+window.cancelQuestionEdit = function() {
+    editingQuestionLogId = null;
+    document.getElementById("materialName").value = "";
+    document.getElementById("logSubject").value = "";
+    document.getElementById("logChapter").value = "";
+    document.getElementById("logQuestions").value = "";
+    document.getElementById("logDate").value = localDateString();
+    document.getElementById("saveLogButton").textContent = "+ Save Entry";
+    document.getElementById("cancelEditButton").style.display = "none";
+    setLogFormMessage("");
+};
 
+window.saveQuestionLog = async function() {
+    if (!currentUser) return;
 
-    const amount =
-        Number(input.value);
+    const studyDate = document.getElementById("logDate").value;
+    const materialName = document.getElementById("materialName").value.trim();
+    const subject = document.getElementById("logSubject").value.trim() || "Unspecified";
+    const chapter = document.getElementById("logChapter").value.trim() || null;
+    const questions = Number(document.getElementById("logQuestions").value);
 
+    if (!studyDate) return setLogFormMessage("Choose the practice date.", true);
+    if (!materialName) return setLogFormMessage("Enter a material name.", true);
+    if (!Number.isSafeInteger(questions) || questions <= 0) {
+        return setLogFormMessage("Enter a whole number of questions greater than zero.", true);
+    }
 
-    if (!amount || amount <= 0) {
+    const payload = {
+        user_id: currentUser.id,
+        study_date: studyDate,
+        subject,
+        chapter,
+        material_name: materialName,
+        questions
+    };
 
-        alert(
-            "Enter a number greater than 0."
-        );
+    setLogFormMessage(editingQuestionLogId ? "Updating entry…" : "Saving entry…");
 
+    let result;
+    if (editingQuestionLogId !== null) {
+        result = await supabase
+            .from("question_logs")
+            .update(payload)
+            .eq("id", editingQuestionLogId)
+            .eq("user_id", currentUser.id);
+    } else {
+        result = await supabase
+            .from("question_logs")
+            .insert(payload);
+    }
+
+    if (result.error) {
+        console.error(result.error);
+        setLogFormMessage("Could not save the entry: " + result.error.message + ". Check that the question_logs table and policies have been created.", true);
         return;
     }
 
+    const wasEditing = editingQuestionLogId !== null;
+    window.cancelQuestionEdit();
+    document.getElementById("historyDatePicker").value = studyDate;
+    document.getElementById("logDate").value = studyDate;
+    setLogFormMessage(wasEditing ? "Entry updated successfully." : "Entry saved successfully.");
+    await loadDashboard();
+};
 
-    const today =
-        localDateString();
-
-
-    /*
-    Get today's current value.
-    */
-
-    const {
-        data: existing,
-        error: readError
-    } = await supabase
-        .from("daily_stats")
-        .select("*")
-        .eq(
-            "user_id",
-            currentUser.id
-        )
-        .eq(
-            "date",
-            today
-        )
-        .maybeSingle();
-
-
-    if (readError) {
-
-        alert(
-            readError.message
-        );
-
-        return;
-    }
-
-
-    let newTotal =
-        amount;
-
-
-    if (existing) {
-
-        newTotal =
-            Number(existing.questions) +
-            amount;
-
-    }
-
-
-    /*
-    Upsert today's count.
-    */
-
-    const {
-        error
-    } = await supabase
-        .from("daily_stats")
-        .upsert(
-
-            {
-
-                user_id:
-                    currentUser.id,
-
-                date:
-                    today,
-
-                questions:
-                    newTotal
-
-            },
-
-            {
-
-                onConflict:
-                    "user_id,date"
-
-            }
-
-        );
-
+window.editQuestionLog = async function(id) {
+    const { data, error } = await supabase
+        .from("question_logs")
+        .select("id, study_date, subject, chapter, material_name, questions")
+        .eq("id", id)
+        .eq("user_id", currentUser.id)
+        .single();
 
     if (error) {
-
-        alert(
-            error.message
-        );
-
+        alert("Could not open this entry: " + error.message);
         return;
     }
 
+    editingQuestionLogId = data.id;
+    document.getElementById("logDate").value = data.study_date;
+    document.getElementById("materialName").value = data.material_name || "";
+    document.getElementById("logSubject").value = data.subject === "Unspecified" ? "" : (data.subject || "");
+    document.getElementById("logChapter").value = data.chapter || "";
+    document.getElementById("logQuestions").value = data.questions;
+    document.getElementById("saveLogButton").textContent = "Save Changes";
+    document.getElementById("cancelEditButton").style.display = "inline-block";
+    setLogFormMessage("Editing an existing entry. Saving changes will adjust the totals automatically.");
+    document.getElementById("questionLogSection").scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
-    input.value = "";
+window.deleteQuestionLog = async function(id) {
+    if (!currentUser) return;
+    if (!confirm("Delete this question-log entry? The totals will be adjusted automatically.")) return;
 
+    const { error } = await supabase
+        .from("question_logs")
+        .delete()
+        .eq("id", id)
+        .eq("user_id", currentUser.id);
 
+    if (error) {
+        alert("Could not delete the entry: " + error.message);
+        return;
+    }
+
+    if (editingQuestionLogId === id) window.cancelQuestionEdit();
     await loadDashboard();
+};
 
+window.loadQuestionLogs = async function() {
+    if (!currentUser) return;
+    const date = document.getElementById("historyDatePicker").value || localDateString();
+    const list = document.getElementById("questionLogList");
+    const summary = document.getElementById("selectedDateSummary");
+    const groups = document.getElementById("questionLogGroups");
+    list.innerHTML = '<div class="loading">Loading question log...</div>';
+    summary.innerHTML = "";
+    groups.innerHTML = "";
+
+    const { data, error } = await supabase
+        .from("question_logs")
+        .select("id, study_date, subject, chapter, material_name, questions, created_at")
+        .eq("user_id", currentUser.id)
+        .eq("study_date", date)
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        list.innerHTML = '<div class="empty">Could not load material history. Make sure the question_logs SQL setup has been run.</div>';
+        return;
+    }
+
+    const rows = data || [];
+    const total = rows.reduce((sum, row) => sum + Number(row.questions || 0), 0);
+    const materialTotals = new Map();
+    const subjectTotals = new Map();
+    rows.forEach(row => {
+        const material = row.material_name || "Unnamed material";
+        const subject = row.subject || "Unspecified";
+        materialTotals.set(material, (materialTotals.get(material) || 0) + Number(row.questions));
+        subjectTotals.set(subject, (subjectTotals.get(subject) || 0) + Number(row.questions));
+    });
+
+    summary.innerHTML = `
+        <div class="log-summary-grid">
+            <div class="log-summary-tile"><div class="log-summary-label">Questions in material log</div><div class="log-summary-value">${total}</div></div>
+            <div class="log-summary-tile"><div class="log-summary-label">Entries</div><div class="log-summary-value">${rows.length}</div></div>
+            <div class="log-summary-tile"><div class="log-summary-label">Practice date</div><div class="log-summary-value" style="font-size:16px;">${escapeHTML(formatDate(date))}</div></div>
+        </div>`;
+
+    if (!rows.length) {
+        list.innerHTML = '<div class="empty">No material entries for this date. Add your first entry above.</div>';
+    } else {
+        list.innerHTML = rows.map(row => `
+            <div class="log-record">
+                <div class="log-record-top">
+                    <div>
+                        <div class="log-record-name">${escapeHTML(row.material_name)}</div>
+                        <div class="log-record-meta">Subject: ${escapeHTML(row.subject || "Unspecified")}${row.chapter ? " · Chapter: " + escapeHTML(row.chapter) : ""}</div>
+                    </div>
+                    <div class="log-record-count">${Number(row.questions)} questions</div>
+                </div>
+                <div class="record-actions">
+                    <button class="edit-log-btn" onclick="editQuestionLog(${Number(row.id)})">Edit</button>
+                    <button class="delete-log-btn" onclick="deleteQuestionLog(${Number(row.id)})">Delete</button>
+                </div>
+            </div>`).join("");
+    }
+
+    function groupRows(title, map) {
+        if (!map.size) return "";
+        return `<div class="log-subheading">${title}</div>` + [...map.entries()]
+            .sort((a, b) => b[1] - a[1])
+            .map(([name, count]) => `<div class="log-group-row"><span>${escapeHTML(name)}</span><strong>${count}</strong></div>`)
+            .join("");
+    }
+
+    groups.innerHTML = groupRows("Questions by material", materialTotals) + groupRows("Questions by subject", subjectTotals);
 };
 
 
