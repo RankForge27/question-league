@@ -1,1277 +1,739 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>QLeague | Solve More. Climb Higher.</title>
-
+<title>QLeague — Solve More. Climb Higher.</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-
 body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #0b0d12;
-
-    color: #f5f5f5;
-
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0b12;
+    color: #f5f5f7;
     min-height: 100vh;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-
-    width: 100%;
-
-    padding: 22px 7%;
-
-    border-bottom:
-        1px solid #242832;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
+button,
+input {
+    font: inherit;
 }
 
+button {
+    cursor: pointer;
+}
+
+/* =========================
+   AUTH
+========================= */
+
+#authScreen {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background:
+        radial-gradient(circle at top, #24154a 0%, #0b0b12 45%);
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 430px;
+    background: #151520;
+    border: 1px solid #2b2b3c;
+    border-radius: 22px;
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
 
 .logo {
-
-    font-size: 26px;
-
+    font-size: 34px;
     font-weight: 800;
-
+    text-align: center;
+    color: #a970ff;
     letter-spacing: -1px;
 }
 
-
-.logo span {
-
-    color: #7c5cff;
-}
-
-
 .tagline {
-
-    color: #858b98;
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   AUTH SCREEN
-========================================================= */
-
-.auth-screen {
-
-    min-height:
-        calc(100vh - 80px);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 30px 20px;
-}
-
-
-.auth-box {
-
-    width: 100%;
-
-    max-width: 430px;
-
-    background: #12151c;
-
-    border:
-        1px solid #242832;
-
-    border-radius: 18px;
-
-    padding: 32px;
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,0.3);
-}
-
-
-.auth-box h1 {
-
-    font-size: 30px;
-
-    margin-bottom: 8px;
-}
-
-
-.auth-description {
-
-    color: #858b98;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-    margin-bottom: 25px;
-}
-
-
-.auth-box label {
-
-    display: block;
-
-    color: #a8adb8;
-
-    font-size: 13px;
-
-    margin-bottom: 7px;
-
-    margin-top: 16px;
-}
-
-
-.auth-box input {
-
-    width: 100%;
-
-    padding: 14px;
-
-    background: #0b0d12;
-
-    border:
-        1px solid #303541;
-
-    border-radius: 10px;
-
-    color: white;
-
-    font-size: 15px;
-
-    outline: none;
-}
-
-
-.auth-box input:focus {
-
-    border-color: #7c5cff;
-}
-
-
-.auth-button {
-
-    width: 100%;
-
-    margin-top: 22px;
-
-    padding: 14px;
-
-    background: #7c5cff;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 10px;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-
-.auth-button:hover {
-
-    opacity: 0.9;
-}
-
-
-.auth-switch {
-
     text-align: center;
-
-    margin-top: 20px;
-
-    color: #858b98;
-
-    font-size: 13px;
-}
-
-
-.auth-switch button {
-
-    background: none;
-
-    border: none;
-
-    color: #9b83ff;
-
-    cursor: pointer;
-
-    font-weight: 700;
-}
-
-
-.auth-message {
-
-    margin-top: 15px;
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    display: none;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.container {
-
-    width: 86%;
-
-    max-width: 1100px;
-
-    margin: 35px auto;
-}
-
-
-/* =========================================================
-   TOP BAR
-========================================================= */
-
-.user-bar {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
+    color: #9292a5;
+    margin-top: 6px;
     margin-bottom: 30px;
 }
 
-
-.user-info {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
+.auth-box h2 {
+    margin-bottom: 18px;
 }
 
-
-.avatar {
-
-    width: 42px;
-
-    height: 42px;
-
-    border-radius: 50%;
-
-    background: #7c5cff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 800;
-}
-
-
-.username-display {
-
-    font-weight: 700;
-}
-
-
-.user-email {
-
-    color: #858b98;
-
-    font-size: 12px;
-
-    margin-top: 3px;
-}
-
-
-.logout-button {
-
-    background: transparent;
-
-    border:
-        1px solid #303541;
-
-    color: #a8adb8;
-
-    padding: 9px 14px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-}
-
-
-.logout-button:hover {
-
-    border-color: #7c5cff;
-
-    color: white;
-}
-
-
-/* =========================================================
-   WELCOME
-========================================================= */
-
-.welcome {
-
-    margin-bottom: 30px;
-}
-
-
-.welcome h1 {
-
-    font-size: 32px;
-
-    margin-bottom: 8px;
-}
-
-
-.welcome p {
-
-    color: #858b98;
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 18px;
-
-    margin-bottom: 25px;
-}
-
-
-.card {
-
-    background: #12151c;
-
-    border:
-        1px solid #242832;
-
-    border-radius: 16px;
-
-    padding: 24px;
-}
-
-
-.card-title {
-
-    color: #858b98;
-
-    font-size: 13px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 12px;
-}
-
-
-.big-number {
-
-    font-size: 38px;
-
-    font-weight: 800;
-}
-
-
-.small-text {
-
-    color: #858b98;
-
-    font-size: 13px;
-
-    margin-top: 7px;
-}
-
-
-/* =========================================================
-   QUESTION INPUT
-========================================================= */
-
-.question-input {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 18px;
-}
-
-
-.question-input input {
-
-    flex: 1;
-
-    padding: 14px;
-
-    background: #0b0d12;
-
-    border:
-        1px solid #303541;
-
-    border-radius: 10px;
-
-    color: white;
-
-    font-size: 16px;
-
-    outline: none;
-}
-
-
-.question-input input:focus {
-
-    border-color: #7c5cff;
-}
-
-
-.add-button {
-
-    border: none;
-
-    cursor: pointer;
-
-    border-radius: 10px;
-
-    padding:
-        14px 20px;
-
-    font-weight: 700;
-
-    color: white;
-
-    background: #7c5cff;
-}
-
-
-.add-button:hover {
-
-    opacity: 0.9;
-}
-
-
-/* =========================================================
-   TARGETS
-========================================================= */
-
-.targets {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 18px;
-
-    margin-bottom: 25px;
-}
-
-
-.target-card {
-
-    background: #12151c;
-
-    border:
-        1px solid #242832;
-
-    border-radius: 16px;
-
-    padding: 24px;
-}
-
-
-.target-header {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-
+.input-group {
     margin-bottom: 15px;
 }
 
-
-.target-header h2 {
-
-    font-size: 18px;
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: #a7a7b8;
+    margin-bottom: 7px;
 }
 
+.input-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 11px;
+    border: 1px solid #353548;
+    background: #0f0f18;
+    color: white;
+    outline: none;
+}
 
-.target-number {
+.input-group input:focus {
+    border-color: #9b5cff;
+}
 
-    color: #858b98;
+.primary-btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 11px;
+    background: #8f4cff;
+    color: white;
+    font-weight: 700;
+    margin-top: 5px;
+}
 
+.primary-btn:hover {
+    background: #9e63ff;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 11px;
+    border: 1px solid #363649;
+    background: transparent;
+    color: #ddd;
+    margin-top: 10px;
+}
+
+.secondary-btn:hover {
+    background: #20202d;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 18px;
+    color: #89899b;
     font-size: 14px;
 }
 
+.auth-switch span {
+    color: #a970ff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.message {
+    margin-top: 15px;
+    padding: 11px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.message.error {
+    display: block;
+    background: #35181e;
+    color: #ff9da8;
+    border: 1px solid #61303a;
+}
+
+.message.success {
+    display: block;
+    background: #17331f;
+    color: #9df0b3;
+    border: 1px solid #285b38;
+}
+
+/* =========================
+   APP
+========================= */
+
+#app {
+    display: none;
+}
+
+header {
+    border-bottom: 1px solid #242432;
+    background: #101018;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-inner {
+    max-width: 1150px;
+    margin: auto;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.header-logo {
+    color: #a970ff;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.username-display {
+    color: #c8c8d5;
+    font-size: 14px;
+}
+
+.logout-btn {
+    border: 1px solid #353545;
+    background: #181821;
+    color: #ddd;
+    padding: 8px 13px;
+    border-radius: 9px;
+}
+
+.logout-btn:hover {
+    background: #252533;
+}
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 30px 20px 60px;
+}
+
+.welcome {
+    margin-bottom: 28px;
+}
+
+.welcome h1 {
+    font-size: 31px;
+    margin-bottom: 7px;
+}
+
+.welcome p {
+    color: #89899c;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.grid {
+    display: grid;
+    gap: 16px;
+}
+
+.stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.target-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 16px;
+}
+
+.card {
+    background: #151520;
+    border: 1px solid #282838;
+    border-radius: 17px;
+    padding: 20px;
+}
+
+.card-title {
+    color: #9292a5;
+    font-size: 13px;
+    margin-bottom: 9px;
+}
+
+.big-number {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.purple {
+    color: #a970ff;
+}
+
+.green {
+    color: #6ee7a0;
+}
+
+.orange {
+    color: #ffb45c;
+}
+
+.progress-wrap {
+    margin-top: 14px;
+}
 
 .progress-bar {
-
-    width: 100%;
-
-    height: 12px;
-
-    background: #252933;
-
-    border-radius: 20px;
-
+    height: 9px;
+    background: #292938;
+    border-radius: 99px;
     overflow: hidden;
 }
 
-
-.progress {
-
+.progress-fill {
     height: 100%;
-
     width: 0%;
-
-    background: #7c5cff;
-
-    border-radius: 20px;
-
-    transition:
-        width 0.4s ease;
+    background: #9255ff;
+    border-radius: 99px;
+    transition: width .3s ease;
 }
 
-
-.remaining {
-
-    margin-top: 12px;
-
-    color: #858b98;
-
-    font-size: 13px;
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #89899b;
+    font-size: 12px;
+    margin-top: 7px;
 }
 
+/* =========================
+   ADD QUESTIONS
+========================= */
 
-/* =========================================================
+.add-section {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.add-section input {
+    flex: 1;
+    padding: 13px;
+    background: #11111a;
+    border: 1px solid #343445;
+    border-radius: 11px;
+    color: white;
+    outline: none;
+}
+
+.add-section input:focus {
+    border-color: #995aff;
+}
+
+.add-btn {
+    padding: 0 22px;
+    border: none;
+    border-radius: 11px;
+    background: #8f4cff;
+    color: white;
+    font-weight: 700;
+}
+
+.add-btn:hover {
+    background: #a066ff;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    margin-top: 30px;
+}
+
+.section-heading {
+    font-size: 21px;
+    margin-bottom: 14px;
+}
+
+/* =========================
    LEADERBOARD
-========================================================= */
+========================= */
 
 .leaderboard {
-
-    background: #12151c;
-
-    border:
-        1px solid #242832;
-
-    border-radius: 16px;
-
-    padding: 24px;
-
-    margin-bottom: 25px;
+    overflow: hidden;
 }
 
-
-.leaderboard h2 {
-
-    margin-bottom: 20px;
-}
-
-
-.player {
-
+.leader-row {
     display: grid;
-
-    grid-template-columns:
-        50px 1fr auto;
-
+    grid-template-columns: 45px 1fr 120px 130px;
     align-items: center;
-
-    padding: 15px 5px;
-
-    border-bottom:
-        1px solid #242832;
+    gap: 10px;
+    padding: 14px 4px;
+    border-bottom: 1px solid #292937;
 }
 
-
-.player:last-child {
-
+.leader-row:last-child {
     border-bottom: none;
 }
-
 
 .rank {
-
     font-weight: 800;
-
-    color: #858b98;
+    color: #8f8fa1;
 }
 
-
-.player-name {
-
+.leader-name {
     font-weight: 700;
 }
 
-
-.player-questions {
-
+.leader-score {
+    text-align: right;
+    color: #b57cff;
     font-weight: 700;
 }
 
-
-.you {
-
-    background: #181522;
-
-    border-radius: 10px;
-
-    padding-left: 12px;
-
-    padding-right: 12px;
+.leader-status {
+    text-align: right;
+    font-size: 12px;
+    color: #89899a;
 }
 
-
-.you .player-name {
-
-    color: #9b83ff;
-}
-
-
-/* =========================================================
+/* =========================
    HISTORY
-========================================================= */
-
-.history {
-
-    background: #12151c;
-
-    border:
-        1px solid #242832;
-
-    border-radius: 16px;
-
-    padding: 24px;
-}
-
-
-.history h2 {
-
-    margin-bottom: 20px;
-}
-
+========================= */
 
 .history-row {
-
     display: flex;
-
-    justify-content:
-        space-between;
-
-    padding: 13px 0;
-
-    border-bottom:
-        1px solid #242832;
+    justify-content: space-between;
+    padding: 13px 3px;
+    border-bottom: 1px solid #292937;
 }
 
-
 .history-row:last-child {
-
     border-bottom: none;
 }
 
-
-.date {
-
-    color: #858b98;
+.history-date {
+    color: #aaaabc;
 }
 
-
-.questions {
-
+.history-count {
     font-weight: 700;
 }
 
+/* =========================
+   TARGET SETTINGS
+========================= */
 
-/* =========================================================
-   FOOTER
-========================================================= */
+.target-settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
 
-footer {
+.target-settings input {
+    width: 100%;
+    padding: 11px;
+    border-radius: 9px;
+    border: 1px solid #343445;
+    background: #0f0f18;
+    color: white;
+}
 
+.save-targets {
+    margin-top: 12px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 9px;
+    background: #252536;
+    color: white;
+}
+
+.save-targets:hover {
+    background: #34344a;
+}
+
+.empty {
+    color: #777789;
+    padding: 15px 0;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
     text-align: center;
-
-    padding: 35px;
-
-    color: #555b68;
-
-    font-size: 13px;
+    padding: 50px;
+    color: #9999aa;
 }
 
-
-/* =========================================================
-   HIDDEN
-========================================================= */
-
-.hidden {
-
-    display: none !important;
-}
-
-
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
 
-    .header {
-
-        padding:
-            18px 5%;
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
 
+    .target-grid {
+        grid-template-columns: 1fr;
+    }
 
-    .tagline {
+    .header-inner {
+        padding: 14px 15px;
+    }
 
+    .username-display {
         display: none;
     }
 
-
     .container {
-
-        width: 92%;
-
-        margin:
-            25px auto;
+        padding: 24px 15px 50px;
     }
-
 
     .welcome h1 {
-
-        font-size: 27px;
+        font-size: 26px;
     }
 
-
-    .stats {
-
-        grid-template-columns:
-            1fr;
+    .add-section {
+        flex-direction: column;
     }
 
-
-    .targets {
-
-        grid-template-columns:
-            1fr;
+    .add-btn {
+        padding: 13px;
     }
 
-
-    .question-input {
-
-        flex-direction:
-            column;
+    .leader-row {
+        grid-template-columns: 35px 1fr 80px;
     }
 
-
-    .question-input button {
-
-        width: 100%;
+    .leader-status {
+        display: none;
     }
 
-
-    .user-bar {
-
-        align-items:
-            flex-start;
-
-        gap: 15px;
+    .target-settings {
+        grid-template-columns: 1fr;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
+<!-- =========================================================
+     AUTH SCREEN
+========================================================= -->
 
-<!-- =======================================================
-     HEADER
-======================================================== -->
-
-<header class="header">
-
-    <div class="logo">
-        Q<span>League</span>
-    </div>
-
-    <div class="tagline">
-        Solve More. Climb Higher.
-    </div>
-
-</header>
-
-
-
-<!-- =======================================================
-     LOGIN / SIGNUP
-======================================================== -->
-
-<section
-    id="authScreen"
-    class="auth-screen"
->
+<div id="authScreen">
 
     <div class="auth-box">
 
-        <h1 id="authTitle">
-            Welcome to QLeague
-        </h1>
+        <div class="logo">QLeague</div>
 
-        <p class="auth-description">
-            Track your questions, compete with your friends,
-            and climb the leaderboard.
-        </p>
-
-
-        <!-- USERNAME -->
-
-        <div id="usernameField">
-
-            <label for="username">
-                Username
-            </label>
-
-            <input
-                id="username"
-                type="text"
-                placeholder="Choose a username"
-                maxlength="20"
-            >
-
+        <div class="tagline">
+            Solve More. Climb Higher.
         </div>
 
+        <!-- LOGIN -->
 
-        <!-- EMAIL -->
+        <div id="loginForm">
 
-        <label for="email">
-            Email
-        </label>
+            <h2>Welcome back</h2>
 
-        <input
-            id="email"
-            type="email"
-            placeholder="you@example.com"
-        >
+            <div class="input-group">
+                <label>Email</label>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@example.com"
+                >
+            </div>
 
+            <div class="input-group">
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Your password"
+                >
+            </div>
 
-        <!-- PASSWORD -->
-
-        <label for="password">
-            Password
-        </label>
-
-        <input
-            id="password"
-            type="password"
-            placeholder="At least 6 characters"
-        >
-
-
-        <button
-            id="authButton"
-            class="auth-button"
-            onclick="handleAuth()"
-        >
-            Create Account
-        </button>
-
-
-        <div
-            id="authMessage"
-            class="auth-message"
-        ></div>
-
-
-        <div class="auth-switch">
-
-            <span id="switchText">
-                Already have an account?
-            </span>
-
-            <button
-                onclick="toggleAuthMode()"
-                id="switchButton"
-            >
-                Login
+            <button class="primary-btn" onclick="login()">
+                Log In
             </button>
 
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     DASHBOARD
-======================================================== -->
-
-<main
-    id="dashboard"
-    class="container hidden"
->
-
-
-    <!-- USER BAR -->
-
-    <div class="user-bar">
-
-        <div class="user-info">
-
-            <div
-                id="avatar"
-                class="avatar"
-            >
-                Q
-            </div>
-
-            <div>
-
-                <div
-                    id="usernameDisplay"
-                    class="username-display"
-                >
-                    User
-                </div>
-
-                <div
-                    id="emailDisplay"
-                    class="user-email"
-                >
-                    user@example.com
-                </div>
-
+            <div class="auth-switch">
+                Don't have an account?
+                <span onclick="showSignup()">Sign Up</span>
             </div>
 
         </div>
 
 
-        <button
-            class="logout-button"
-            onclick="logout()"
-        >
-            Logout
-        </button>
+        <!-- SIGNUP -->
 
-    </div>
+        <div id="signupForm" style="display:none;">
 
+            <h2>Create account</h2>
 
-
-    <!-- WELCOME -->
-
-    <section class="welcome">
-
-        <h1>
-            Welcome back,
-            <span id="welcomeUsername">
-                User
-            </span> 👋
-        </h1>
-
-        <p>
-            Keep solving. Keep climbing.
-        </p>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         STATS
-    ==================================================== -->
-
-    <section class="stats">
-
-
-        <!-- TODAY -->
-
-        <div class="card">
-
-            <div class="card-title">
-                Today's Questions
-            </div>
-
-            <div
-                id="todayQuestions"
-                class="big-number"
-            >
-                0
-            </div>
-
-            <div class="small-text">
-                questions solved today
-            </div>
-
-
-            <div class="question-input">
-
+            <div class="input-group">
+                <label>Username</label>
                 <input
-                    id="questionInput"
-                    type="number"
-                    min="1"
-                    placeholder="Questions completed"
+                    type="text"
+                    id="signupUsername"
+                    placeholder="Your QLeague username"
                 >
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="you@example.com"
+                >
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="At least 6 characters"
+                >
+            </div>
+
+            <button class="primary-btn" onclick="signup()">
+                Create Account
+            </button>
+
+            <div class="auth-switch">
+                Already have an account?
+                <span onclick="showLogin()">Log In</span>
+            </div>
+
+        </div>
+
+        <div id="authMessage" class="message"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     APP
+========================================================= -->
+
+<div id="app">
+
+    <header>
+
+        <div class="header-inner">
+
+            <div class="header-logo">
+                QLeague
+            </div>
+
+            <div class="header-right">
+
+                <div
+                    class="username-display"
+                    id="headerUsername"
+                >
+                </div>
 
                 <button
-                    class="add-button"
-                    onclick="addQuestions()"
+                    class="logout-btn"
+                    onclick="logout()"
                 >
-                    + Add
+                    Logout
                 </button>
 
             </div>
 
         </div>
 
+    </header>
 
 
-        <!-- STREAK -->
+    <main class="container">
 
-        <div class="card">
+        <div class="welcome">
 
-            <div class="card-title">
-                Current Streak
-            </div>
+            <h1>
+                Hey, <span id="welcomeUsername">Player</span> 👋
+            </h1>
 
-            <div
-                id="streak"
-                class="big-number"
-            >
-                🔥 0
-            </div>
-
-            <div class="small-text">
-                consecutive days
-            </div>
+            <p>
+                Keep solving. Keep climbing.
+            </p>
 
         </div>
 
 
+        <!-- =================================================
+             BASIC STATS
+        ================================================= -->
 
-        <!-- ALL TIME -->
+        <div class="grid stats-grid">
 
-        <div class="card">
+            <div class="card">
 
-            <div class="card-title">
-                All-Time Questions
-            </div>
-
-            <div
-                id="allTimeQuestions"
-                class="big-number"
-            >
-                0
-            </div>
-
-            <div class="small-text">
-                questions solved
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         TARGETS
-    ==================================================== -->
-
-    <section class="targets">
-
-
-        <!-- WEEKLY -->
-
-        <div class="target-card">
-
-            <div class="target-header">
-
-                <h2>
-                    Weekly Target
-                </h2>
-
-                <div class="target-number">
-
-                    <span id="weeklyQuestions">
-                        0
-                    </span>
-
-                    /
-
-                    <span id="weeklyTarget">
-                        500
-                    </span>
-
+                <div class="card-title">
+                    Today's Questions
                 </div>
-
-            </div>
-
-
-            <div class="progress-bar">
 
                 <div
-                    id="weeklyProgress"
-                    class="progress"
-                ></div>
-
-            </div>
-
-
-            <div
-                id="weeklyRemaining"
-                class="remaining"
-            >
-                500 questions remaining
-            </div>
-
-        </div>
-
-
-
-        <!-- MONTHLY -->
-
-        <div class="target-card">
-
-            <div class="target-header">
-
-                <h2>
-                    Monthly Target
-                </h2>
-
-                <div class="target-number">
-
-                    <span id="monthlyQuestions">
-                        0
-                    </span>
-
-                    /
-
-                    <span id="monthlyTarget">
-                        2000
-                    </span>
-
+                    class="big-number purple"
+                    id="todayQuestions"
+                >
+                    0
                 </div>
 
             </div>
 
 
-            <div class="progress-bar">
+            <div class="card">
+
+                <div class="card-title">
+                    Current Streak
+                </div>
 
                 <div
-                    id="monthlyProgress"
-                    class="progress"
-                ></div>
+                    class="big-number orange"
+                    id="currentStreak"
+                >
+                    0
+                </div>
+
+                <div
+                    style="color:#777789;margin-top:5px;font-size:12px;"
+                >
+                    consecutive days
+                </div>
 
             </div>
 
 
-            <div
-                id="monthlyRemaining"
-                class="remaining"
-            >
-                2000 questions remaining
-            </div>
+            <div class="card">
 
-        </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         LEADERBOARD
-    ==================================================== -->
-
-    <section class="leaderboard">
-
-        <h2>
-            🏆 Weekly Leaderboard
-        </h2>
-
-
-        <div id="leaderboardList">
-
-            <div class="player">
-
-                <div class="rank">
-                    —
+                <div class="card-title">
+                    All-Time Questions
                 </div>
 
-                <div class="player-name">
-                    No users yet
-                </div>
-
-                <div class="player-questions">
+                <div
+                    class="big-number green"
+                    id="allTimeQuestions"
+                >
                     0
                 </div>
 
@@ -1279,58 +741,280 @@ footer {
 
         </div>
 
-    </section>
 
+        <!-- =================================================
+             TARGETS
+        ================================================= -->
 
+        <div class="grid target-grid">
 
-    <!-- ===================================================
-         HISTORY
-    ==================================================== -->
+            <div class="card">
 
-    <section class="history">
-
-        <h2>
-            📊 Recent History
-        </h2>
-
-
-        <div id="historyList">
-
-            <div class="history-row">
-
-                <div class="date">
-                    No history yet
+                <div class="card-title">
+                    Weekly Target
                 </div>
 
-                <div class="questions">
-                    0 questions
+                <div>
+                    <span
+                        class="big-number"
+                        id="weeklyProgress"
+                    >
+                        0
+                    </span>
+
+                    <span style="color:#777789;">
+                        /
+                    </span>
+
+                    <span id="weeklyTarget">
+                        500
+                    </span>
+                </div>
+
+                <div class="progress-wrap">
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            id="weeklyBar"
+                        >
+                        </div>
+
+                    </div>
+
+                    <div class="progress-info">
+
+                        <span id="weeklyShortfall">
+                            500 remaining
+                        </span>
+
+                        <span id="weeklyPercent">
+                            0%
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Monthly Target
+                </div>
+
+                <div>
+
+                    <span
+                        class="big-number"
+                        id="monthlyProgress"
+                    >
+                        0
+                    </span>
+
+                    <span style="color:#777789;">
+                        /
+                    </span>
+
+                    <span id="monthlyTarget">
+                        2000
+                    </span>
+
+                </div>
+
+                <div class="progress-wrap">
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            id="monthlyBar"
+                        >
+                        </div>
+
+                    </div>
+
+                    <div class="progress-info">
+
+                        <span id="monthlyShortfall">
+                            2000 remaining
+                        </span>
+
+                        <span id="monthlyPercent">
+                            0%
+                        </span>
+
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-    </section>
+
+        <!-- =================================================
+             ADD QUESTIONS
+        ================================================= -->
+
+        <div class="section">
+
+            <div class="section-heading">
+                Update Today's Questions
+            </div>
+
+            <div class="card">
+
+                <div style="color:#8f8fa0;font-size:13px;">
+                    Enter how many questions you solved.
+                    This number will be added to today's total.
+                </div>
+
+                <div class="add-section">
+
+                    <input
+                        type="number"
+                        id="questionInput"
+                        min="1"
+                        placeholder="e.g. 50"
+                    >
+
+                    <button
+                        class="add-btn"
+                        onclick="addQuestions()"
+                    >
+                        + Add Questions
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
-</main>
+        <!-- =================================================
+             LEADERBOARD
+        ================================================= -->
+
+        <div class="section">
+
+            <div class="section-heading">
+                🏆 Weekly Leaderboard
+            </div>
+
+            <div class="card leaderboard">
+
+                <div id="leaderboard">
+
+                    <div class="loading">
+                        Loading leaderboard...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
+        <!-- =================================================
+             HISTORY
+        ================================================= -->
 
-<footer>
+        <div class="section">
 
-    QLeague © 2026 · Solve More. Climb Higher.
+            <div class="section-heading">
+                📜 Recent History
+            </div>
 
-</footer>
+            <div class="card">
+
+                <div id="history">
+
+                    <div class="loading">
+                        Loading history...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
+        <!-- =================================================
+             TARGET SETTINGS
+        ================================================= -->
 
-<!-- =======================================================
-     JAVASCRIPT
-======================================================== -->
+        <div class="section">
+
+            <div class="section-heading">
+                🎯 My Targets
+            </div>
+
+            <div class="card">
+
+                <div style="color:#88889a;font-size:13px;">
+                    Set your own weekly and monthly goals.
+                </div>
+
+                <div class="target-settings">
+
+                    <div>
+
+                        <label
+                            style="font-size:12px;color:#9999aa;"
+                        >
+                            Weekly Target
+                        </label>
+
+                        <input
+                            type="number"
+                            id="weeklyTargetInput"
+                            min="0"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label
+                            style="font-size:12px;color:#9999aa;"
+                        >
+                            Monthly Target
+                        </label>
+
+                        <input
+                            type="number"
+                            id="monthlyTargetInput"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="save-targets"
+                    onclick="saveTargets()"
+                >
+                    Save Targets
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
 
 <script type="module">
-
 
 /* =========================================================
    SUPABASE
@@ -1338,23 +1022,30 @@ footer {
 
 import {
     createClient
-}
-from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
+/*
+===========================================================
+IMPORTANT
 
-/* =========================================================
-   PUT YOUR SUPABASE INFORMATION HERE
-========================================================= */
+PUT YOUR OWN VALUES HERE.
+
+SUPABASE URL:
+https://xxxxxxxxxxxxxxxx.supabase.co
+
+SUPABASE PUBLISHABLE KEY:
+your publishable key
+
+DO NOT USE THE SERVICE_ROLE / SECRET KEY.
+===========================================================
+*/
 
 const SUPABASE_URL =
     "https://crpsafrdwtirkybiqqeu.supabase.co";
 
-
 const SUPABASE_KEY =
     "sb_publishable_PC-_1N0dsn_5qsRMdt4WHA_LgfRmZjD";
-
 
 
 const supabase =
@@ -1364,168 +1055,299 @@ const supabase =
     );
 
 
-
 /* =========================================================
-   AUTH MODE
+   GLOBAL VARIABLES
 ========================================================= */
 
-let signupMode = true;
+let currentUser = null;
+let currentProfile = null;
+let currentTargets = {
+    weekly_target: 500,
+    monthly_target: 2000
+};
 
 
+/* =========================================================
+   DATE HELPERS
+========================================================= */
 
-function showMessage(
-    message,
-    success = false
-) {
+function localDateString(date = new Date()) {
 
-    const box =
-        document.getElementById(
-            "authMessage"
-        );
+    const year = date.getFullYear();
 
-    box.style.display = "block";
+    const month =
+        String(date.getMonth() + 1)
+        .padStart(2, "0");
 
-    box.textContent = message;
+    const day =
+        String(date.getDate())
+        .padStart(2, "0");
 
-    if (success) {
-
-        box.style.background =
-            "#12351f";
-
-        box.style.color =
-            "#7ee2a8";
-
-    } else {
-
-        box.style.background =
-            "#35151b";
-
-        box.style.color =
-            "#ff8c9a";
-
-    }
-
+    return `${year}-${month}-${day}`;
 }
 
 
+function getStartOfWeek() {
+
+    const now = new Date();
+
+    const day = now.getDay();
+
+    const difference =
+        day === 0 ? -6 : 1 - day;
+
+    const monday = new Date(now);
+
+    monday.setDate(
+        now.getDate() + difference
+    );
+
+    return localDateString(monday);
+}
+
+
+function getStartOfMonth() {
+
+    const now = new Date();
+
+    return localDateString(
+        new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            1
+        )
+    );
+}
+
+
+function formatDate(dateString) {
+
+    const date =
+        new Date(dateString + "T00:00:00");
+
+    return date.toLocaleDateString(
+        undefined,
+        {
+            weekday: "short",
+            month: "short",
+            day: "numeric"
+        }
+    );
+}
+
 
 /* =========================================================
-   TOGGLE LOGIN / SIGNUP
+   UI HELPERS
 ========================================================= */
 
-window.toggleAuthMode =
-function () {
-
-    signupMode =
-        !signupMode;
-
-
-    const title =
-        document.getElementById(
-            "authTitle"
-        );
-
-
-    const usernameField =
-        document.getElementById(
-            "usernameField"
-        );
-
-
-    const authButton =
-        document.getElementById(
-            "authButton"
-        );
-
-
-    const switchText =
-        document.getElementById(
-            "switchText"
-        );
-
-
-    const switchButton =
-        document.getElementById(
-            "switchButton"
-        );
-
+function showMessage(text, type = "error") {
 
     const message =
-        document.getElementById(
-            "authMessage"
+        document.getElementById("authMessage");
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+}
+
+
+function clearMessage() {
+
+    const message =
+        document.getElementById("authMessage");
+
+    message.textContent = "";
+
+    message.className = "message";
+}
+
+
+window.showLogin = function() {
+
+    clearMessage();
+
+    document.getElementById("loginForm")
+        .style.display = "block";
+
+    document.getElementById("signupForm")
+        .style.display = "none";
+};
+
+
+window.showSignup = function() {
+
+    clearMessage();
+
+    document.getElementById("loginForm")
+        .style.display = "none";
+
+    document.getElementById("signupForm")
+        .style.display = "block";
+};
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
+
+window.signup = async function() {
+
+    clearMessage();
+
+    const username =
+        document
+        .getElementById("signupUsername")
+        .value
+        .trim();
+
+    const email =
+        document
+        .getElementById("signupEmail")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("signupPassword")
+        .value;
+
+
+    if (!username || !email || !password) {
+
+        showMessage(
+            "Please fill in all fields."
+        );
+
+        return;
+    }
+
+
+    if (username.length < 3) {
+
+        showMessage(
+            "Username must be at least 3 characters."
+        );
+
+        return;
+    }
+
+
+    if (password.length < 6) {
+
+        showMessage(
+            "Password must be at least 6 characters."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        /*
+        Save username temporarily.
+
+        This is important when Supabase requires
+        email confirmation.
+        */
+
+        localStorage.setItem(
+            "qleague_pending_username",
+            username
         );
 
 
-    message.style.display =
-        "none";
+        const {
+            data,
+            error
+        } = await supabase.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+
+                data: {
+                    username: username
+                }
+
+            }
+
+        });
 
 
-    if (signupMode) {
+        if (error) {
+            throw error;
+        }
 
-        title.textContent =
-            "Welcome to QLeague";
 
-        usernameField.style.display =
-            "block";
+        /*
+        If email confirmation is disabled,
+        Supabase gives us a session immediately.
+        */
 
-        authButton.textContent =
-            "Create Account";
+        if (data.session) {
 
-        switchText.textContent =
-            "Already have an account?";
+            await finishProfileSetup(
+                data.user,
+                username
+            );
 
-        switchButton.textContent =
-            "Login";
+            showMessage(
+                "Account created successfully!",
+                "success"
+            );
 
-    } else {
+            return;
+        }
 
-        title.textContent =
-            "Welcome Back";
 
-        usernameField.style.display =
-            "none";
+        /*
+        If email confirmation is enabled,
+        there won't be a session yet.
+        */
 
-        authButton.textContent =
-            "Login";
+        showMessage(
+            "Account created! Check your email, confirm your email address, then log in.",
+            "success"
+        );
 
-        switchText.textContent =
-            "Don't have an account?";
+    }
 
-        switchButton.textContent =
-            "Create Account";
+    catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message ||
+            "Unable to create account."
+        );
 
     }
 
 };
 
 
-
 /* =========================================================
-   SIGN UP / LOGIN
+   LOGIN
 ========================================================= */
 
-window.handleAuth =
-async function () {
+window.login = async function() {
+
+    clearMessage();
 
     const email =
         document
-        .getElementById("email")
+        .getElementById("loginEmail")
         .value
         .trim();
-
 
     const password =
         document
-        .getElementById("password")
+        .getElementById("loginPassword")
         .value;
-
-
-    const username =
-        document
-        .getElementById("username")
-        .value
-        .trim();
-
 
 
     if (!email || !password) {
@@ -1535,51 +1357,41 @@ async function () {
         );
 
         return;
-
     }
 
 
+    try {
 
-    if (signupMode && !username) {
+        const {
+            data,
+            error
+        } = await supabase.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        await loadApplication(
+            data.user
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
 
         showMessage(
-            "Please choose a username."
-        );
-
-        return;
-
-    }
-
-
-
-    if (
-        signupMode &&
-        username.length < 3
-    ) {
-
-        showMessage(
-            "Username must be at least 3 characters."
-        );
-
-        return;
-
-    }
-
-
-
-    if (signupMode) {
-
-        await signUp(
-            email,
-            password,
-            username
-        );
-
-    } else {
-
-        await login(
-            email,
-            password
+            error.message ||
+            "Login failed."
         );
 
     }
@@ -1587,348 +1399,1193 @@ async function () {
 };
 
 
-
 /* =========================================================
-   SIGN UP
+   PROFILE SETUP
 ========================================================= */
 
-async function signUp(
-    email,
-    password,
-    username
+async function finishProfileSetup(
+    user,
+    usernameFromSignup = null
 ) {
 
-    showMessage(
-        "Creating your account...",
-        true
+    if (!user) {
+        return;
+    }
+
+
+    /*
+    First see whether profile already exists.
+    */
+
+    const {
+        data: existingProfile,
+        error: profileReadError
+    } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .maybeSingle();
+
+
+    if (profileReadError) {
+
+        console.error(
+            profileReadError
+        );
+
+        throw profileReadError;
+    }
+
+
+    if (existingProfile) {
+
+        currentProfile =
+            existingProfile;
+
+        return;
+    }
+
+
+    /*
+    Find username from:
+    1. signup argument
+    2. localStorage
+    3. Supabase user metadata
+    4. fallback
+    */
+
+    let username =
+        usernameFromSignup ||
+        localStorage.getItem(
+            "qleague_pending_username"
+        ) ||
+        user.user_metadata?.username ||
+        "Player";
+
+
+    username =
+        username.trim();
+
+
+    /*
+    Try to create profile.
+    */
+
+    const {
+        data: newProfile,
+        error: profileError
+    } = await supabase
+        .from("profiles")
+        .insert({
+
+            id: user.id,
+
+            username: username
+
+        })
+        .select()
+        .single();
+
+
+    if (profileError) {
+
+        /*
+        If username already exists,
+        give a useful message.
+        */
+
+        if (
+            profileError.code === "23505"
+        ) {
+
+            throw new Error(
+                "That username is already taken. Please choose another one."
+            );
+
+        }
+
+        throw profileError;
+    }
+
+
+    currentProfile =
+        newProfile;
+
+
+    /*
+    Create default targets.
+
+    RLS allows this because we're now
+    authenticated.
+    */
+
+    const {
+        error: targetError
+    } = await supabase
+        .from("targets")
+        .insert({
+
+            user_id: user.id,
+
+            weekly_target: 500,
+
+            monthly_target: 2000
+
+        });
+
+
+    /*
+    If target already exists, that's fine.
+    */
+
+    if (
+        targetError &&
+        targetError.code !== "23505"
+    ) {
+
+        console.error(
+            targetError
+        );
+
+    }
+
+
+    localStorage.removeItem(
+        "qleague_pending_username"
     );
+}
+
+
+/* =========================================================
+   LOAD APPLICATION
+========================================================= */
+
+async function loadApplication(user) {
+
+    try {
+
+        currentUser = user;
+
+
+        await finishProfileSetup(
+            user
+        );
+
+
+        /*
+        Load targets.
+        */
+
+        await loadTargets();
+
+
+        /*
+        Show app.
+        */
+
+        document
+            .getElementById("authScreen")
+            .style.display = "none";
+
+        document
+            .getElementById("app")
+            .style.display = "block";
+
+
+        updateUserUI();
+
+
+        await loadDashboard();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message ||
+            "Unable to load your account."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   USER UI
+========================================================= */
+
+function updateUserUI() {
+
+    const username =
+        currentProfile?.username ||
+        "Player";
+
+
+    document
+        .getElementById("headerUsername")
+        .textContent =
+        "@" + username;
+
+
+    document
+        .getElementById("welcomeUsername")
+        .textContent =
+        username;
+}
+
+
+/* =========================================================
+   LOAD TARGETS
+========================================================= */
+
+async function loadTargets() {
+
+    const {
+        data,
+        error
+    } = await supabase
+        .from("targets")
+        .select("*")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+    }
+
+
+    if (data) {
+
+        currentTargets = data;
+
+    }
+    else {
+
+        currentTargets = {
+
+            weekly_target: 500,
+
+            monthly_target: 2000
+
+        };
+
+    }
+
+
+    document
+        .getElementById("weeklyTargetInput")
+        .value =
+        currentTargets.weekly_target;
+
+
+    document
+        .getElementById("monthlyTargetInput")
+        .value =
+        currentTargets.monthly_target;
+}
+
+
+/* =========================================================
+   LOAD DASHBOARD
+========================================================= */
+
+async function loadDashboard() {
+
+    await Promise.all([
+
+        loadMyStats(),
+
+        loadLeaderboard(),
+
+        loadHistory()
+
+    ]);
+
+}
+
+
+/* =========================================================
+   LOAD MY STATS
+========================================================= */
+
+async function loadMyStats() {
+
+    const startWeek =
+        getStartOfWeek();
+
+    const startMonth =
+        getStartOfMonth();
 
 
     const {
         data,
         error
-    } =
-    await supabase.auth.signUp({
-
-        email:
-            email,
-
-        password:
-            password
-
-    });
+    } = await supabase
+        .from("daily_stats")
+        .select("date, questions")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .order(
+            "date",
+            {
+                ascending: false
+            }
+        );
 
 
     if (error) {
 
-        showMessage(
+        console.error(error);
+
+        return;
+    }
+
+
+    const stats =
+        data || [];
+
+
+    const today =
+        localDateString();
+
+
+    const todayRow =
+        stats.find(
+            row => row.date === today
+        );
+
+
+    const todayQuestions =
+        todayRow?.questions || 0;
+
+
+    const weeklyRows =
+        stats.filter(
+            row => row.date >= startWeek
+        );
+
+
+    const monthlyRows =
+        stats.filter(
+            row => row.date >= startMonth
+        );
+
+
+    const weeklyTotal =
+        weeklyRows.reduce(
+            (sum, row) =>
+                sum + Number(row.questions),
+            0
+        );
+
+
+    const monthlyTotal =
+        monthlyRows.reduce(
+            (sum, row) =>
+                sum + Number(row.questions),
+            0
+        );
+
+
+    const allTimeTotal =
+        stats.reduce(
+            (sum, row) =>
+                sum + Number(row.questions),
+            0
+        );
+
+
+    const streak =
+        calculateStreak(stats);
+
+
+    document
+        .getElementById("todayQuestions")
+        .textContent =
+        todayQuestions;
+
+
+    document
+        .getElementById("weeklyProgress")
+        .textContent =
+        weeklyTotal;
+
+
+    document
+        .getElementById("monthlyProgress")
+        .textContent =
+        monthlyTotal;
+
+
+    document
+        .getElementById("allTimeQuestions")
+        .textContent =
+        allTimeTotal;
+
+
+    document
+        .getElementById("currentStreak")
+        .textContent =
+        streak;
+
+
+    updateProgress(
+        weeklyTotal,
+        currentTargets.weekly_target,
+        "weekly"
+    );
+
+
+    updateProgress(
+        monthlyTotal,
+        currentTargets.monthly_target,
+        "monthly"
+    );
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress(
+    current,
+    target,
+    type
+) {
+
+    target =
+        Number(target) || 0;
+
+    current =
+        Number(current) || 0;
+
+
+    const percent =
+        target > 0
+            ? Math.min(
+                100,
+                Math.round(
+                    (current / target) * 100
+                )
+            )
+            : 0;
+
+
+    const remaining =
+        Math.max(
+            0,
+            target - current
+        );
+
+
+    document
+        .getElementById(
+            type + "Bar"
+        )
+        .style.width =
+        percent + "%";
+
+
+    document
+        .getElementById(
+            type + "Percent"
+        )
+        .textContent =
+        percent + "%";
+
+
+    document
+        .getElementById(
+            type + "Shortfall"
+        )
+        .textContent =
+        remaining > 0
+            ? remaining + " remaining"
+            : "Target completed! 🎉";
+
+
+    document
+        .getElementById(
+            type + "Target"
+        )
+        .textContent =
+        target;
+
+}
+
+
+/* =========================================================
+   STREAK
+========================================================= */
+
+function calculateStreak(stats) {
+
+    const map = new Map();
+
+    stats.forEach(row => {
+
+        map.set(
+            row.date,
+            Number(row.questions)
+        );
+
+    });
+
+
+    let streak = 0;
+
+    const date =
+        new Date();
+
+
+    while (true) {
+
+        const key =
+            localDateString(date);
+
+        const questions =
+            map.get(key) || 0;
+
+
+        if (questions <= 0) {
+            break;
+        }
+
+
+        streak++;
+
+        date.setDate(
+            date.getDate() - 1
+        );
+
+    }
+
+
+    return streak;
+}
+
+
+/* =========================================================
+   ADD QUESTIONS
+========================================================= */
+
+window.addQuestions = async function() {
+
+    const input =
+        document.getElementById(
+            "questionInput"
+        );
+
+
+    const amount =
+        Number(input.value);
+
+
+    if (!amount || amount <= 0) {
+
+        alert(
+            "Enter a number greater than 0."
+        );
+
+        return;
+    }
+
+
+    const today =
+        localDateString();
+
+
+    /*
+    Get today's current value.
+    */
+
+    const {
+        data: existing,
+        error: readError
+    } = await supabase
+        .from("daily_stats")
+        .select("*")
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .eq(
+            "date",
+            today
+        )
+        .maybeSingle();
+
+
+    if (readError) {
+
+        alert(
+            readError.message
+        );
+
+        return;
+    }
+
+
+    let newTotal =
+        amount;
+
+
+    if (existing) {
+
+        newTotal =
+            Number(existing.questions) +
+            amount;
+
+    }
+
+
+    /*
+    Upsert today's count.
+    */
+
+    const {
+        error
+    } = await supabase
+        .from("daily_stats")
+        .upsert(
+
+            {
+
+                user_id:
+                    currentUser.id,
+
+                date:
+                    today,
+
+                questions:
+                    newTotal
+
+            },
+
+            {
+
+                onConflict:
+                    "user_id,date"
+
+            }
+
+        );
+
+
+    if (error) {
+
+        alert(
             error.message
         );
 
         return;
-
     }
 
 
+    input.value = "";
 
-    if (!data.user) {
 
-        showMessage(
-            "Account creation failed."
-        );
+    await loadDashboard();
 
-        return;
+};
 
-    }
 
+/* =========================================================
+   LEADERBOARD
+========================================================= */
+
+async function loadLeaderboard() {
+
+    const startWeek =
+        getStartOfWeek();
 
 
     const {
-        error:
-        profileError
-    } =
-    await supabase
+        data: stats,
+        error: statsError
+    } = await supabase
+        .from("daily_stats")
+        .select(
+            "user_id, date, questions"
+        )
+        .gte(
+            "date",
+            startWeek
+        );
+
+
+    if (statsError) {
+
+        console.error(
+            statsError
+        );
+
+        return;
+    }
+
+
+    const {
+        data: profiles,
+        error: profileError
+    } = await supabase
         .from("profiles")
-        .insert({
-
-            id:
-                data.user.id,
-
-            username:
-                username
-
-        });
-
+        .select(
+            "id, username"
+        );
 
 
     if (profileError) {
 
-        showMessage(
-            profileError.message
+        console.error(
+            profileError
         );
 
         return;
-
     }
 
 
-
-    const {
-        error:
-        targetError
-    } =
-    await supabase
-        .from("targets")
-        .insert({
-
-            user_id:
-                data.user.id,
-
-            weekly_target:
-                500,
-
-            monthly_target:
-                2000
-
-        });
+    const totals = {};
 
 
+    (stats || []).forEach(row => {
 
-    if (targetError) {
+        if (!totals[row.user_id]) {
 
-        showMessage(
-            targetError.message
-        );
+            totals[row.user_id] = 0;
 
-        return;
-
-    }
+        }
 
 
-
-    showMessage(
-        "Account created successfully!",
-        true
-    );
-
-
-    setTimeout(
-        loadUser,
-        800
-    );
-
-}
-
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-async function login(
-    email,
-    password
-) {
-
-    showMessage(
-        "Logging in...",
-        true
-    );
-
-
-    const {
-        error
-    } =
-    await supabase.auth.signInWithPassword({
-
-        email:
-            email,
-
-        password:
-            password
+        totals[row.user_id] +=
+            Number(row.questions);
 
     });
 
 
+    const leaderboard =
+        (profiles || [])
+        .map(profile => ({
+
+            id: profile.id,
+
+            username: profile.username,
+
+            total:
+                totals[profile.id] || 0
+
+        }))
+        .sort(
+            (a, b) =>
+                b.total - a.total
+        );
+
+
+    renderLeaderboard(
+        leaderboard
+    );
+
+}
+
+
+/* =========================================================
+   RENDER LEADERBOARD
+========================================================= */
+
+function renderLeaderboard(
+    leaderboard
+) {
+
+    const container =
+        document.getElementById(
+            "leaderboard"
+        );
+
+
+    if (!leaderboard.length) {
+
+        container.innerHTML =
+            `<div class="empty">
+                No players yet.
+            </div>`;
+
+        return;
+    }
+
+
+    const myTotal =
+        leaderboard.find(
+            player =>
+                player.id === currentUser.id
+        )?.total || 0;
+
+
+    container.innerHTML =
+        leaderboard
+        .map(
+            (player, index) => {
+
+                let status = "";
+
+
+                if (
+                    player.id ===
+                    currentUser.id
+                ) {
+
+                    status =
+                        "You";
+
+                }
+                else if (
+                    player.total >
+                    myTotal
+                ) {
+
+                    status =
+                        (player.total -
+                        myTotal) +
+                        " ahead";
+
+                }
+                else if (
+                    player.total <
+                    myTotal
+                ) {
+
+                    status =
+                        (myTotal -
+                        player.total) +
+                        " behind";
+
+                }
+                else {
+
+                    status =
+                        "Tied";
+
+                }
+
+
+                return `
+
+                <div class="leader-row">
+
+                    <div class="rank">
+                        #${index + 1}
+                    </div>
+
+                    <div class="leader-name">
+                        ${escapeHTML(
+                            player.username
+                        )}
+                        ${
+                            player.id ===
+                            currentUser.id
+                                ? " ⭐"
+                                : ""
+                        }
+                    </div>
+
+                    <div class="leader-score">
+                        ${player.total}
+                    </div>
+
+                    <div class="leader-status">
+                        ${status}
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+async function loadHistory() {
+
+    const {
+        data,
+        error
+    } = await supabase
+        .from("daily_stats")
+        .select(
+            "date, questions"
+        )
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .order(
+            "date",
+            {
+                ascending: false
+            }
+        )
+        .limit(14);
+
+
     if (error) {
 
-        showMessage(
+        console.error(error);
+
+        return;
+    }
+
+
+    const container =
+        document.getElementById(
+            "history"
+        );
+
+
+    if (!data || !data.length) {
+
+        container.innerHTML =
+            `<div class="empty">
+                No question history yet.
+                Start solving!
+            </div>`;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        data
+        .map(
+            row => `
+
+            <div class="history-row">
+
+                <div class="history-date">
+                    ${formatDate(row.date)}
+                </div>
+
+                <div class="history-count">
+                    ${row.questions} questions
+                </div>
+
+            </div>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   SAVE TARGETS
+========================================================= */
+
+window.saveTargets = async function() {
+
+    const weekly =
+        Number(
+            document
+            .getElementById(
+                "weeklyTargetInput"
+            )
+            .value
+        );
+
+
+    const monthly =
+        Number(
+            document
+            .getElementById(
+                "monthlyTargetInput"
+            )
+            .value
+        );
+
+
+    if (
+        weekly < 0 ||
+        monthly < 0
+    ) {
+
+        alert(
+            "Targets cannot be negative."
+        );
+
+        return;
+    }
+
+
+    const {
+        error
+    } = await supabase
+        .from("targets")
+        .upsert(
+
+            {
+
+                user_id:
+                    currentUser.id,
+
+                weekly_target:
+                    weekly,
+
+                monthly_target:
+                    monthly
+
+            },
+
+            {
+
+                onConflict:
+                    "user_id"
+
+            }
+
+        );
+
+
+    if (error) {
+
+        alert(
             error.message
         );
 
         return;
-
     }
 
 
-    await loadUser();
+    currentTargets = {
 
-}
+        weekly_target:
+            weekly,
 
+        monthly_target:
+            monthly
+
+    };
+
+
+    await loadDashboard();
+
+
+    alert(
+        "Targets saved successfully!"
+    );
+
+};
 
 
 /* =========================================================
    LOGOUT
 ========================================================= */
 
-window.logout =
-async function () {
+window.logout = async function() {
 
     await supabase.auth.signOut();
 
+    currentUser = null;
+
+    currentProfile = null;
+
+
     document
-        .getElementById("dashboard")
-        .classList
-        .add("hidden");
+        .getElementById("app")
+        .style.display = "none";
 
 
     document
         .getElementById("authScreen")
-        .classList
-        .remove("hidden");
+        .style.display = "flex";
+
+
+    showLogin();
 
 };
 
 
-
 /* =========================================================
-   LOAD USER
+   ESCAPE HTML
 ========================================================= */
 
-async function loadUser() {
+function escapeHTML(value) {
 
-    const {
-        data:
-        {
-            user
-        }
-    } =
-    await supabase.auth.getUser();
+    return String(value)
 
-
-
-    if (!user) {
-
-        document
-            .getElementById("dashboard")
-            .classList
-            .add("hidden");
-
-        document
-            .getElementById("authScreen")
-            .classList
-            .remove("hidden");
-
-        return;
-
-    }
-
-
-
-    const {
-        data:
-        profile
-    } =
-    await supabase
-        .from("profiles")
-        .select("*")
-        .eq(
-            "id",
-            user.id
+        .replace(
+            /&/g,
+            "&amp;"
         )
-        .single();
 
-
-
-    if (profile) {
-
-        document
-            .getElementById(
-                "usernameDisplay"
-            )
-            .textContent =
-            profile.username;
-
-
-        document
-            .getElementById(
-                "welcomeUsername"
-            )
-            .textContent =
-            profile.username;
-
-
-        document
-            .getElementById(
-                "avatar"
-            )
-            .textContent =
-            profile.username
-                .charAt(0)
-                .toUpperCase();
-
-    }
-
-
-
-    document
-        .getElementById(
-            "emailDisplay"
+        .replace(
+            /</g,
+            "&lt;"
         )
-        .textContent =
-        user.email;
 
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-    document
-        .getElementById("authScreen")
-        .classList
-        .add("hidden");
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-
-    document
-        .getElementById("dashboard")
-        .classList
-        .remove("hidden");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
-
 /* =========================================================
-   CHECK CURRENT SESSION
-========================================================= */
-
-const {
-    data:
-    {
-        session
-    }
-} =
-await supabase.auth.getSession();
-
-
-
-if (session) {
-
-    await loadUser();
-
-}
-
-
-
-/* =========================================================
-   AUTH STATE LISTENER
+   AUTH STATE
 ========================================================= */
 
 supabase.auth.onAuthStateChange(
-    async (
-        event,
-        session
-    ) => {
+    async (event, session) => {
 
-        if (session) {
+        if (
+            session &&
+            session.user
+        ) {
 
-            await loadUser();
+            /*
+            Avoid unnecessary reloads
+            on TOKEN_REFRESHED events.
+            */
+
+            if (
+                event ===
+                "SIGNED_IN"
+            ) {
+
+                await loadApplication(
+                    session.user
+                );
+
+            }
 
         }
 
@@ -1936,9 +2593,38 @@ supabase.auth.onAuthStateChange(
 );
 
 
+/* =========================================================
+   CHECK EXISTING SESSION
+========================================================= */
+
+async function checkSession() {
+
+    const {
+        data
+    } = await supabase.auth.getSession();
+
+
+    if (
+        data.session &&
+        data.session.user
+    ) {
+
+        await loadApplication(
+            data.session.user
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+checkSession();
+
 </script>
 
-
 </body>
-
 </html>
