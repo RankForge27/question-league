@@ -544,10 +544,22 @@ header {
 .revision-stat { border:1px solid #2e2e40; border-radius:12px; padding:13px; background:#11111b; }
 .revision-stat strong { display:block; color:#d2b4ff; font-size:22px; }
 .revision-stat span { color:#9696aa; font-size:11px; }
-.revision-item { border:1px solid #2b2b3b; border-radius:14px; background:#11111a; padding:15px; margin-top:11px; }
-.revision-item-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
-.revision-chapter { font-weight:800; font-size:15px; overflow-wrap:anywhere; }
-.revision-subject { color:#b9a0df; font-size:12px; margin-top:5px; }
+.revision-subject-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 14px; }
+.revision-subject-tab { border:1px solid #38384b; border-radius:999px; background:#15151f; color:#aaaabd; padding:9px 14px; font-size:12px; font-weight:800; cursor:pointer; }
+.revision-subject-tab.active { background:#382450; color:#eadbff; border-color:#8756c4; }
+.revision-item { border:1px solid #2b2b3b; border-radius:13px; background:#11111a; margin-top:9px; overflow:hidden; }
+.revision-item[open] { border-color:#60428a; }
+.revision-item summary { display:flex; align-items:center; gap:12px; list-style:none; cursor:pointer; padding:14px; }
+.revision-item summary::-webkit-details-marker { display:none; }
+.revision-item summary::after { content:'＋'; color:#b99ae8; font-size:18px; margin-left:4px; }
+.revision-item[open] summary::after { content:'−'; }
+.revision-chapter-info { flex:1; min-width:0; }
+.revision-chapter { font-weight:800; font-size:14px; overflow-wrap:anywhere; }
+.revision-subject { color:#9f9fb4; font-size:11px; margin-top:4px; }
+.revision-percent { color:#d2b4ff; font-weight:900; font-size:14px; white-space:nowrap; }
+.revision-item-body { padding:0 14px 14px; }
+.revision-item-top { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:10px; }
+.revision-item-top .revision-subject { margin:0; }
 .revision-delete { border:1px solid #55303a; background:#24151a; color:#ffabb5; border-radius:8px; padding:7px 9px; font-size:12px; }
 .revision-progress-line { height:6px; background:#2b2b3a; border-radius:999px; overflow:hidden; margin:10px 0 13px; }
 .revision-progress-fill { height:100%; background:linear-gradient(90deg,#8f4cff,#55d6b0); border-radius:999px; transition:width .2s ease; }
@@ -1113,6 +1125,7 @@ header {
                 </form>
                 <div id="revisionMessage" class="revision-message" role="status"></div>
                 <div id="revisionOverview" class="revision-overview"></div>
+                <div id="revisionSubjectTabs" class="revision-subject-tabs" aria-label="Filter chapters by subject"></div>
                 <div id="revisionChapterList"><div class="revision-empty">Loading revision tracker…</div></div>
             </div>
         </div>
@@ -2409,6 +2422,13 @@ const REVISION_STAGES = [
     { key: "revision_1_completed", label: "Revision 1 completed" },
     { key: "revision_2_completed", label: "Revision 2 completed" }
 ];
+const REVISION_SUBJECTS = ["Physics", "Chemistry", "Mathematics", "Other"];
+let activeRevisionSubject = "Physics";
+window.setRevisionSubject = function(subject) {
+    if (!REVISION_SUBJECTS.includes(subject)) return;
+    activeRevisionSubject = subject;
+    loadRevisionChapters();
+};
 
 window.addRevisionChapter = async function(event) {
     if (event) event.preventDefault();
@@ -2436,6 +2456,7 @@ window.addRevisionChapter = async function(event) {
     }
 
     document.getElementById("revisionChapterName").value = "";
+    activeRevisionSubject = subject;
     message.textContent = "Chapter added — start checking off your progress.";
     await loadRevisionChapters();
 };
@@ -2472,7 +2493,8 @@ async function loadRevisionChapters() {
     if (!currentUser) return;
     const list = document.getElementById("revisionChapterList");
     const overview = document.getElementById("revisionOverview");
-    if (!list || !overview) return;
+    const tabs = document.getElementById("revisionSubjectTabs");
+    if (!list || !overview || !tabs) return;
 
     const { data, error } = await supabase.from("revision_chapters")
         .select("id, subject, chapter_name, theory_completed, questions_completed, advanced_completed, revision_1_completed, revision_2_completed, created_at, updated_at")
@@ -2483,6 +2505,7 @@ async function loadRevisionChapters() {
     if (error) {
         console.error(error);
         overview.innerHTML = "";
+        tabs.innerHTML = "";
         list.innerHTML = '<div class="revision-empty">Could not load tracker. Run the QLeague revision tracker SQL setup in Supabase, then refresh this page.</div>';
         return;
     }
@@ -2496,12 +2519,18 @@ async function loadRevisionChapters() {
         <div class="revision-stat"><strong>${completedChapters}</strong><span>Chapters fully completed</span></div>
         <div class="revision-stat"><strong>${totalStages ? Math.round(completedStages / totalStages * 100) : 0}%</strong><span>Overall revision progress</span></div>`;
 
-    if (!rows.length) {
-        list.innerHTML = '<div class="revision-empty">No chapters yet. Add your first chapter above to start tracking your preparation.</div>';
+    tabs.innerHTML = REVISION_SUBJECTS.map(subject => {
+        const count = rows.filter(row => row.subject === subject).length;
+        return `<button type="button" class="revision-subject-tab ${activeRevisionSubject === subject ? "active" : ""}" aria-pressed="${activeRevisionSubject === subject}" onclick="setRevisionSubject('${subject}')">${subject}${count ? ` · ${count}` : ""}</button>`;
+    }).join("");
+
+    const visibleRows = rows.filter(row => row.subject === activeRevisionSubject);
+    if (!visibleRows.length) {
+        list.innerHTML = `<div class="revision-empty">No ${escapeHTML(activeRevisionSubject)} chapters yet. Add a chapter above and choose ${escapeHTML(activeRevisionSubject)} as its subject.</div>`;
         return;
     }
 
-    list.innerHTML = rows.map(row => {
+    list.innerHTML = visibleRows.map(row => {
         const done = REVISION_STAGES.filter(stage => row[stage.key]).length;
         const percent = Math.round(done / REVISION_STAGES.length * 100);
         const checklist = REVISION_STAGES.map(stage => `
@@ -2510,14 +2539,20 @@ async function loadRevisionChapters() {
                 <span>${stage.label}</span>
             </label>`).join("");
         return `
-            <article class="revision-item">
-                <div class="revision-item-top">
-                    <div><div class="revision-chapter">${escapeHTML(row.chapter_name)}</div><div class="revision-subject">${escapeHTML(row.subject)} · ${done}/5 stages completed</div></div>
-                    <button class="revision-delete" onclick="deleteRevisionChapter(${Number(row.id)})" type="button">Remove</button>
+            <details class="revision-item">
+                <summary>
+                    <div class="revision-chapter-info">
+                        <div class="revision-chapter">${escapeHTML(row.chapter_name)}</div>
+                        <div class="revision-subject">${done}/5 stages completed</div>
+                        <div class="revision-progress-line"><div class="revision-progress-fill" style="width:${percent}%"></div></div>
+                    </div>
+                    <div class="revision-percent">${percent}%</div>
+                </summary>
+                <div class="revision-item-body">
+                    <div class="revision-item-top"><div class="revision-subject">Chapter checklist</div><button class="revision-delete" onclick="deleteRevisionChapter(${Number(row.id)})" type="button">Remove chapter</button></div>
+                    <div class="revision-checklist">${checklist}</div>
                 </div>
-                <div class="revision-progress-line"><div class="revision-progress-fill" style="width:${percent}%"></div></div>
-                <div class="revision-checklist">${checklist}</div>
-            </article>`;
+            </details>`;
     }).join("");
 }
 
