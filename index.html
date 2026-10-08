@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>QLeague | Solve More. Climb Higher.</title>
 
+
 <style>
 
-/* ==============================
+/* =========================================================
    RESET
-================================= */
+========================================================= */
 
 * {
     margin: 0;
@@ -18,353 +25,837 @@
     box-sizing: border-box;
 }
 
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background: #0b0d12;
+
     color: #f5f5f5;
+
     min-height: 100vh;
 }
 
-/* ==============================
+
+/* =========================================================
    HEADER
-================================= */
+========================================================= */
 
 .header {
+
     width: 100%;
+
     padding: 22px 7%;
-    border-bottom: 1px solid #242832;
+
+    border-bottom:
+        1px solid #242832;
+
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     align-items: center;
 }
 
+
 .logo {
+
     font-size: 26px;
+
     font-weight: 800;
+
     letter-spacing: -1px;
 }
 
+
 .logo span {
+
     color: #7c5cff;
 }
 
+
 .tagline {
+
     color: #858b98;
+
     font-size: 13px;
 }
 
-/* ==============================
-   MAIN
-================================= */
 
-.container {
-    width: 86%;
-    max-width: 1100px;
-    margin: 35px auto;
+/* =========================================================
+   AUTH SCREEN
+========================================================= */
+
+.auth-screen {
+
+    min-height:
+        calc(100vh - 80px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
 }
 
-/* ==============================
-   WELCOME
-================================= */
 
-.welcome {
-    margin-bottom: 30px;
+.auth-box {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    background: #12151c;
+
+    border:
+        1px solid #242832;
+
+    border-radius: 18px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.3);
 }
 
-.welcome h1 {
-    font-size: 32px;
+
+.auth-box h1 {
+
+    font-size: 30px;
+
     margin-bottom: 8px;
 }
 
-.welcome p {
+
+.auth-description {
+
     color: #858b98;
-}
 
-/* ==============================
-   STATS
-================================= */
+    font-size: 14px;
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    line-height: 1.6;
+
     margin-bottom: 25px;
 }
 
-.card {
-    background: #12151c;
-    border: 1px solid #242832;
-    border-radius: 16px;
-    padding: 24px;
-}
 
-.card-title {
-    color: #858b98;
+.auth-box label {
+
+    display: block;
+
+    color: #a8adb8;
+
     font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
+
+    margin-bottom: 7px;
+
+    margin-top: 16px;
 }
 
-.big-number {
-    font-size: 38px;
-    font-weight: 800;
-}
 
-.small-text {
-    color: #858b98;
-    font-size: 13px;
-    margin-top: 7px;
-}
+.auth-box input {
 
-/* ==============================
-   QUESTION INPUT
-================================= */
+    width: 100%;
 
-.question-input {
-    display: flex;
-    gap: 10px;
-    margin-top: 18px;
-}
-
-.question-input input {
-    flex: 1;
     padding: 14px;
+
     background: #0b0d12;
-    border: 1px solid #303541;
+
+    border:
+        1px solid #303541;
+
     border-radius: 10px;
+
     color: white;
-    font-size: 16px;
+
+    font-size: 15px;
+
     outline: none;
 }
 
-.question-input input:focus {
+
+.auth-box input:focus {
+
     border-color: #7c5cff;
 }
 
-button {
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 14px 20px;
-    font-weight: 700;
-    color: white;
+
+.auth-button {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 14px;
+
     background: #7c5cff;
-    transition: 0.2s;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
 }
 
-button:hover {
-    transform: translateY(-1px);
+
+.auth-button:hover {
+
     opacity: 0.9;
 }
 
-/* ==============================
-   TARGETS
-================================= */
 
-.targets {
+.auth-switch {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #858b98;
+
+    font-size: 13px;
+}
+
+
+.auth-switch button {
+
+    background: none;
+
+    border: none;
+
+    color: #9b83ff;
+
+    cursor: pointer;
+
+    font-weight: 700;
+}
+
+
+.auth-message {
+
+    margin-top: 15px;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    display: none;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container {
+
+    width: 86%;
+
+    max-width: 1100px;
+
+    margin: 35px auto;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.user-bar {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+.user-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #7c5cff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+}
+
+
+.username-display {
+
+    font-weight: 700;
+}
+
+
+.user-email {
+
+    color: #858b98;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+.logout-button {
+
+    background: transparent;
+
+    border:
+        1px solid #303541;
+
+    color: #a8adb8;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+.logout-button:hover {
+
+    border-color: #7c5cff;
+
+    color: white;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.welcome {
+
+    margin-bottom: 30px;
+}
+
+
+.welcome h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+
+.welcome p {
+
+    color: #858b98;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 18px;
+
     margin-bottom: 25px;
 }
 
-.target-card {
+
+.card {
+
     background: #12151c;
-    border: 1px solid #242832;
+
+    border:
+        1px solid #242832;
+
     border-radius: 16px;
+
     padding: 24px;
 }
 
-.target-header {
+
+.card-title {
+
+    color: #858b98;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 12px;
+}
+
+
+.big-number {
+
+    font-size: 38px;
+
+    font-weight: 800;
+}
+
+
+.small-text {
+
+    color: #858b98;
+
+    font-size: 13px;
+
+    margin-top: 7px;
+}
+
+
+/* =========================================================
+   QUESTION INPUT
+========================================================= */
+
+.question-input {
+
     display: flex;
-    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+
+.question-input input {
+
+    flex: 1;
+
+    padding: 14px;
+
+    background: #0b0d12;
+
+    border:
+        1px solid #303541;
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+.question-input input:focus {
+
+    border-color: #7c5cff;
+}
+
+
+.add-button {
+
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 10px;
+
+    padding:
+        14px 20px;
+
+    font-weight: 700;
+
+    color: white;
+
+    background: #7c5cff;
+}
+
+
+.add-button:hover {
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   TARGETS
+========================================================= */
+
+.targets {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+.target-card {
+
+    background: #12151c;
+
+    border:
+        1px solid #242832;
+
+    border-radius: 16px;
+
+    padding: 24px;
+}
+
+
+.target-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
     align-items: center;
+
     margin-bottom: 15px;
 }
 
+
 .target-header h2 {
+
     font-size: 18px;
 }
 
+
 .target-number {
+
     color: #858b98;
+
     font-size: 14px;
 }
 
+
 .progress-bar {
+
     width: 100%;
+
     height: 12px;
+
     background: #252933;
+
     border-radius: 20px;
+
     overflow: hidden;
 }
 
+
 .progress {
+
     height: 100%;
-    width: 82%;
+
+    width: 0%;
+
     background: #7c5cff;
+
     border-radius: 20px;
-    transition: width 0.4s;
+
+    transition:
+        width 0.4s ease;
 }
 
-.progress.month {
-    width: 84%;
-}
 
 .remaining {
+
     margin-top: 12px;
+
     color: #858b98;
+
     font-size: 13px;
 }
 
-/* ==============================
+
+/* =========================================================
    LEADERBOARD
-================================= */
+========================================================= */
 
 .leaderboard {
+
     background: #12151c;
-    border: 1px solid #242832;
+
+    border:
+        1px solid #242832;
+
     border-radius: 16px;
+
     padding: 24px;
+
     margin-bottom: 25px;
 }
 
+
 .leaderboard h2 {
+
     margin-bottom: 20px;
 }
 
+
 .player {
+
     display: grid;
-    grid-template-columns: 50px 1fr auto;
+
+    grid-template-columns:
+        50px 1fr auto;
+
     align-items: center;
+
     padding: 15px 5px;
-    border-bottom: 1px solid #242832;
+
+    border-bottom:
+        1px solid #242832;
 }
 
+
 .player:last-child {
+
     border-bottom: none;
 }
 
+
 .rank {
+
     font-weight: 800;
+
     color: #858b98;
 }
 
+
 .player-name {
+
     font-weight: 700;
 }
+
 
 .player-questions {
+
     font-weight: 700;
 }
 
+
 .you {
+
     background: #181522;
+
     border-radius: 10px;
+
     padding-left: 12px;
+
     padding-right: 12px;
 }
 
+
 .you .player-name {
+
     color: #9b83ff;
 }
 
-/* ==============================
+
+/* =========================================================
    HISTORY
-================================= */
+========================================================= */
 
 .history {
+
     background: #12151c;
-    border: 1px solid #242832;
+
+    border:
+        1px solid #242832;
+
     border-radius: 16px;
+
     padding: 24px;
 }
 
+
 .history h2 {
+
     margin-bottom: 20px;
 }
 
+
 .history-row {
+
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     padding: 13px 0;
-    border-bottom: 1px solid #242832;
+
+    border-bottom:
+        1px solid #242832;
 }
 
+
 .history-row:last-child {
+
     border-bottom: none;
 }
 
+
 .date {
+
     color: #858b98;
 }
 
+
 .questions {
+
     font-weight: 700;
 }
 
-/* ==============================
+
+/* =========================================================
    FOOTER
-================================= */
+========================================================= */
 
 footer {
+
     text-align: center;
+
     padding: 35px;
+
     color: #555b68;
+
     font-size: 13px;
 }
 
-/* ==============================
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =========================================================
    MOBILE
-================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
     .header {
-        padding: 18px 5%;
+
+        padding:
+            18px 5%;
     }
 
+
     .tagline {
+
         display: none;
     }
 
+
     .container {
+
         width: 92%;
-        margin: 25px auto;
+
+        margin:
+            25px auto;
     }
 
+
     .welcome h1 {
+
         font-size: 27px;
     }
 
+
     .stats {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
+
 
     .targets {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
+
 
     .question-input {
-        flex-direction: column;
+
+        flex-direction:
+            column;
     }
 
+
     .question-input button {
+
         width: 100%;
+    }
+
+
+    .user-bar {
+
+        align-items:
+            flex-start;
+
+        gap: 15px;
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<!-- ==============================
+
+<!-- =======================================================
      HEADER
-================================= -->
+======================================================== -->
 
 <header class="header">
 
@@ -379,17 +870,173 @@ footer {
 </header>
 
 
-<!-- ==============================
-     MAIN
-================================= -->
 
-<main class="container">
+<!-- =======================================================
+     LOGIN / SIGNUP
+======================================================== -->
+
+<section
+    id="authScreen"
+    class="auth-screen"
+>
+
+    <div class="auth-box">
+
+        <h1 id="authTitle">
+            Welcome to QLeague
+        </h1>
+
+        <p class="auth-description">
+            Track your questions, compete with your friends,
+            and climb the leaderboard.
+        </p>
+
+
+        <!-- USERNAME -->
+
+        <div id="usernameField">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                id="username"
+                type="text"
+                placeholder="Choose a username"
+                maxlength="20"
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <label for="email">
+            Email
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+        >
+
+
+        <!-- PASSWORD -->
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="At least 6 characters"
+        >
+
+
+        <button
+            id="authButton"
+            class="auth-button"
+            onclick="handleAuth()"
+        >
+            Create Account
+        </button>
+
+
+        <div
+            id="authMessage"
+            class="auth-message"
+        ></div>
+
+
+        <div class="auth-switch">
+
+            <span id="switchText">
+                Already have an account?
+            </span>
+
+            <button
+                onclick="toggleAuthMode()"
+                id="switchButton"
+            >
+                Login
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     DASHBOARD
+======================================================== -->
+
+<main
+    id="dashboard"
+    class="container hidden"
+>
+
+
+    <!-- USER BAR -->
+
+    <div class="user-bar">
+
+        <div class="user-info">
+
+            <div
+                id="avatar"
+                class="avatar"
+            >
+                Q
+            </div>
+
+            <div>
+
+                <div
+                    id="usernameDisplay"
+                    class="username-display"
+                >
+                    User
+                </div>
+
+                <div
+                    id="emailDisplay"
+                    class="user-email"
+                >
+                    user@example.com
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="logout-button"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </div>
+
+
 
     <!-- WELCOME -->
 
     <section class="welcome">
 
-        <h1>Welcome, RankForge 👋</h1>
+        <h1>
+            Welcome back,
+            <span id="welcomeUsername">
+                User
+            </span> 👋
+        </h1>
 
         <p>
             Keep solving. Keep climbing.
@@ -398,11 +1045,13 @@ footer {
     </section>
 
 
-    <!-- ==============================
-         TOP STATS
-    ================================= -->
+
+    <!-- ===================================================
+         STATS
+    ==================================================== -->
 
     <section class="stats">
+
 
         <!-- TODAY -->
 
@@ -412,30 +1061,38 @@ footer {
                 Today's Questions
             </div>
 
-            <div class="big-number" id="todayQuestions">
-                73
+            <div
+                id="todayQuestions"
+                class="big-number"
+            >
+                0
             </div>
 
             <div class="small-text">
                 questions solved today
             </div>
 
+
             <div class="question-input">
 
                 <input
-                    type="number"
                     id="questionInput"
-                    placeholder="Add questions"
+                    type="number"
                     min="1"
+                    placeholder="Questions completed"
                 >
 
-                <button onclick="addQuestions()">
+                <button
+                    class="add-button"
+                    onclick="addQuestions()"
+                >
                     + Add
                 </button>
 
             </div>
 
         </div>
+
 
 
         <!-- STREAK -->
@@ -446,8 +1103,11 @@ footer {
                 Current Streak
             </div>
 
-            <div class="big-number">
-                🔥 6
+            <div
+                id="streak"
+                class="big-number"
+            >
+                🔥 0
             </div>
 
             <div class="small-text">
@@ -457,7 +1117,8 @@ footer {
         </div>
 
 
-        <!-- TOTAL -->
+
+        <!-- ALL TIME -->
 
         <div class="card">
 
@@ -465,8 +1126,11 @@ footer {
                 All-Time Questions
             </div>
 
-            <div class="big-number" id="allTimeQuestions">
-                1847
+            <div
+                id="allTimeQuestions"
+                class="big-number"
+            >
+                0
             </div>
 
             <div class="small-text">
@@ -478,9 +1142,10 @@ footer {
     </section>
 
 
-    <!-- ==============================
+
+    <!-- ===================================================
          TARGETS
-    ================================= -->
+    ==================================================== -->
 
     <section class="targets">
 
@@ -491,29 +1156,46 @@ footer {
 
             <div class="target-header">
 
-                <h2>Weekly Target</h2>
+                <h2>
+                    Weekly Target
+                </h2>
 
                 <div class="target-number">
-                    <span id="weeklyQuestions">412</span> /
-                    <span id="weeklyTarget">500</span>
+
+                    <span id="weeklyQuestions">
+                        0
+                    </span>
+
+                    /
+
+                    <span id="weeklyTarget">
+                        500
+                    </span>
+
                 </div>
 
             </div>
+
 
             <div class="progress-bar">
 
                 <div
+                    id="weeklyProgress"
                     class="progress"
-                    id="weeklyProgress">
-                </div>
+                ></div>
 
             </div>
 
-            <div class="remaining" id="weeklyRemaining">
-                88 questions remaining
+
+            <div
+                id="weeklyRemaining"
+                class="remaining"
+            >
+                500 questions remaining
             </div>
 
         </div>
+
 
 
         <!-- MONTHLY -->
@@ -522,169 +1204,117 @@ footer {
 
             <div class="target-header">
 
-                <h2>Monthly Target</h2>
+                <h2>
+                    Monthly Target
+                </h2>
 
                 <div class="target-number">
-                    <span id="monthlyQuestions">1684</span> /
-                    <span id="monthlyTarget">2000</span>
+
+                    <span id="monthlyQuestions">
+                        0
+                    </span>
+
+                    /
+
+                    <span id="monthlyTarget">
+                        2000
+                    </span>
+
                 </div>
 
             </div>
+
 
             <div class="progress-bar">
 
                 <div
-                    class="progress month"
-                    id="monthlyProgress">
+                    id="monthlyProgress"
+                    class="progress"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="monthlyRemaining"
+                class="remaining"
+            >
+                2000 questions remaining
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         LEADERBOARD
+    ==================================================== -->
+
+    <section class="leaderboard">
+
+        <h2>
+            🏆 Weekly Leaderboard
+        </h2>
+
+
+        <div id="leaderboardList">
+
+            <div class="player">
+
+                <div class="rank">
+                    —
+                </div>
+
+                <div class="player-name">
+                    No users yet
+                </div>
+
+                <div class="player-questions">
+                    0
                 </div>
 
             </div>
 
-            <div class="remaining" id="monthlyRemaining">
-                316 questions remaining
-            </div>
-
         </div>
 
     </section>
 
 
-    <!-- ==============================
-         LEADERBOARD
-    ================================= -->
 
-    <section class="leaderboard">
-
-        <h2>🏆 Weekly Leaderboard</h2>
-
-
-        <div class="player">
-
-            <div class="rank">1</div>
-
-            <div class="player-name">
-                Arjun
-            </div>
-
-            <div class="player-questions">
-                587
-            </div>
-
-        </div>
-
-
-        <div class="player">
-
-            <div class="rank">2</div>
-
-            <div class="player-name">
-                Rohan
-            </div>
-
-            <div class="player-questions">
-                541
-            </div>
-
-        </div>
-
-
-        <div class="player you">
-
-            <div class="rank">3</div>
-
-            <div class="player-name">
-                You
-            </div>
-
-            <div class="player-questions">
-                512
-            </div>
-
-        </div>
-
-
-        <div class="player">
-
-            <div class="rank">4</div>
-
-            <div class="player-name">
-                Aditya
-            </div>
-
-            <div class="player-questions">
-                398
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-    <!-- ==============================
+    <!-- ===================================================
          HISTORY
-    ================================= -->
+    ==================================================== -->
 
     <section class="history">
 
-        <h2>📊 Recent History</h2>
+        <h2>
+            📊 Recent History
+        </h2>
 
 
-        <div class="history-row">
+        <div id="historyList">
 
-            <div class="date">
-                Today
-            </div>
+            <div class="history-row">
 
-            <div class="questions">
-                73 questions
-            </div>
+                <div class="date">
+                    No history yet
+                </div>
 
-        </div>
+                <div class="questions">
+                    0 questions
+                </div>
 
-
-        <div class="history-row">
-
-            <div class="date">
-                Yesterday
-            </div>
-
-            <div class="questions">
-                91 questions
             </div>
 
         </div>
-
-
-        <div class="history-row">
-
-            <div class="date">
-                Monday
-            </div>
-
-            <div class="questions">
-                67 questions
-            </div>
-
-        </div>
-
-
-        <div class="history-row">
-
-            <div class="date">
-                Sunday
-            </div>
-
-            <div class="questions">
-                82 questions
-            </div>
-
-        </div>
-
 
     </section>
 
+
 </main>
+
 
 
 <footer>
@@ -694,54 +1324,621 @@ footer {
 </footer>
 
 
-<!-- ==============================
+
+<!-- =======================================================
      JAVASCRIPT
-================================= -->
+======================================================== -->
 
-<script>
+<script type="module">
 
-let todayQuestions = 73;
-let allTimeQuestions = 1847;
 
-function addQuestions() {
+/* =========================================================
+   SUPABASE
+========================================================= */
 
-    const input =
-        document.getElementById("questionInput");
+import {
+    createClient
+}
+from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-    const amount =
-        parseInt(input.value);
 
-    if (!amount || amount <= 0) {
 
-        alert("Enter a valid number of questions.");
+/* =========================================================
+   PUT YOUR SUPABASE INFORMATION HERE
+========================================================= */
+
+const SUPABASE_URL =
+    "https://crpsafrdwtirkybiqqeu.supabase.co/rest/v1/";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_PC-_1N0dsn_5qsRMdt4WHA_LgfRmZjD";
+
+
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =========================================================
+   AUTH MODE
+========================================================= */
+
+let signupMode = true;
+
+
+
+function showMessage(
+    message,
+    success = false
+) {
+
+    const box =
+        document.getElementById(
+            "authMessage"
+        );
+
+    box.style.display = "block";
+
+    box.textContent = message;
+
+    if (success) {
+
+        box.style.background =
+            "#12351f";
+
+        box.style.color =
+            "#7ee2a8";
+
+    } else {
+
+        box.style.background =
+            "#35151b";
+
+        box.style.color =
+            "#ff8c9a";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TOGGLE LOGIN / SIGNUP
+========================================================= */
+
+window.toggleAuthMode =
+function () {
+
+    signupMode =
+        !signupMode;
+
+
+    const title =
+        document.getElementById(
+            "authTitle"
+        );
+
+
+    const usernameField =
+        document.getElementById(
+            "usernameField"
+        );
+
+
+    const authButton =
+        document.getElementById(
+            "authButton"
+        );
+
+
+    const switchText =
+        document.getElementById(
+            "switchText"
+        );
+
+
+    const switchButton =
+        document.getElementById(
+            "switchButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "authMessage"
+        );
+
+
+    message.style.display =
+        "none";
+
+
+    if (signupMode) {
+
+        title.textContent =
+            "Welcome to QLeague";
+
+        usernameField.style.display =
+            "block";
+
+        authButton.textContent =
+            "Create Account";
+
+        switchText.textContent =
+            "Already have an account?";
+
+        switchButton.textContent =
+            "Login";
+
+    } else {
+
+        title.textContent =
+            "Welcome Back";
+
+        usernameField.style.display =
+            "none";
+
+        authButton.textContent =
+            "Login";
+
+        switchText.textContent =
+            "Don't have an account?";
+
+        switchButton.textContent =
+            "Create Account";
+
+    }
+
+};
+
+
+
+/* =========================================================
+   SIGN UP / LOGIN
+========================================================= */
+
+window.handleAuth =
+async function () {
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+
+
+    if (!email || !password) {
+
+        showMessage(
+            "Please enter your email and password."
+        );
 
         return;
+
     }
 
 
-    todayQuestions += amount;
 
-    allTimeQuestions += amount;
+    if (signupMode && !username) {
 
+        showMessage(
+            "Please choose a username."
+        );
 
-    document.getElementById("todayQuestions")
-        .textContent = todayQuestions;
+        return;
 
-    document.getElementById("allTimeQuestions")
-        .textContent = allTimeQuestions;
-
-
-    input.value = "";
+    }
 
 
-    alert(
-        amount +
-        " questions added successfully!"
+
+    if (
+        signupMode &&
+        username.length < 3
+    ) {
+
+        showMessage(
+            "Username must be at least 3 characters."
+        );
+
+        return;
+
+    }
+
+
+
+    if (signupMode) {
+
+        await signUp(
+            email,
+            password,
+            username
+        );
+
+    } else {
+
+        await login(
+            email,
+            password
+        );
+
+    }
+
+};
+
+
+
+/* =========================================================
+   SIGN UP
+========================================================= */
+
+async function signUp(
+    email,
+    password,
+    username
+) {
+
+    showMessage(
+        "Creating your account...",
+        true
+    );
+
+
+    const {
+        data,
+        error
+    } =
+    await supabase.auth.signUp({
+
+        email:
+            email,
+
+        password:
+            password
+
+    });
+
+
+    if (error) {
+
+        showMessage(
+            error.message
+        );
+
+        return;
+
+    }
+
+
+
+    if (!data.user) {
+
+        showMessage(
+            "Account creation failed."
+        );
+
+        return;
+
+    }
+
+
+
+    const {
+        error:
+        profileError
+    } =
+    await supabase
+        .from("profiles")
+        .insert({
+
+            id:
+                data.user.id,
+
+            username:
+                username
+
+        });
+
+
+
+    if (profileError) {
+
+        showMessage(
+            profileError.message
+        );
+
+        return;
+
+    }
+
+
+
+    const {
+        error:
+        targetError
+    } =
+    await supabase
+        .from("targets")
+        .insert({
+
+            user_id:
+                data.user.id,
+
+            weekly_target:
+                500,
+
+            monthly_target:
+                2000
+
+        });
+
+
+
+    if (targetError) {
+
+        showMessage(
+            targetError.message
+        );
+
+        return;
+
+    }
+
+
+
+    showMessage(
+        "Account created successfully!",
+        true
+    );
+
+
+    setTimeout(
+        loadUser,
+        800
     );
 
 }
 
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(
+    email,
+    password
+) {
+
+    showMessage(
+        "Logging in...",
+        true
+    );
+
+
+    const {
+        error
+    } =
+    await supabase.auth.signInWithPassword({
+
+        email:
+            email,
+
+        password:
+            password
+
+    });
+
+
+    if (error) {
+
+        showMessage(
+            error.message
+        );
+
+        return;
+
+    }
+
+
+    await loadUser();
+
+}
+
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+window.logout =
+async function () {
+
+    await supabase.auth.signOut();
+
+    document
+        .getElementById("dashboard")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("authScreen")
+        .classList
+        .remove("hidden");
+
+};
+
+
+
+/* =========================================================
+   LOAD USER
+========================================================= */
+
+async function loadUser() {
+
+    const {
+        data:
+        {
+            user
+        }
+    } =
+    await supabase.auth.getUser();
+
+
+
+    if (!user) {
+
+        document
+            .getElementById("dashboard")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("authScreen")
+            .classList
+            .remove("hidden");
+
+        return;
+
+    }
+
+
+
+    const {
+        data:
+        profile
+    } =
+    await supabase
+        .from("profiles")
+        .select("*")
+        .eq(
+            "id",
+            user.id
+        )
+        .single();
+
+
+
+    if (profile) {
+
+        document
+            .getElementById(
+                "usernameDisplay"
+            )
+            .textContent =
+            profile.username;
+
+
+        document
+            .getElementById(
+                "welcomeUsername"
+            )
+            .textContent =
+            profile.username;
+
+
+        document
+            .getElementById(
+                "avatar"
+            )
+            .textContent =
+            profile.username
+                .charAt(0)
+                .toUpperCase();
+
+    }
+
+
+
+    document
+        .getElementById(
+            "emailDisplay"
+        )
+        .textContent =
+        user.email;
+
+
+    document
+        .getElementById("authScreen")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("dashboard")
+        .classList
+        .remove("hidden");
+
+}
+
+
+
+/* =========================================================
+   CHECK CURRENT SESSION
+========================================================= */
+
+const {
+    data:
+    {
+        session
+    }
+} =
+await supabase.auth.getSession();
+
+
+
+if (session) {
+
+    await loadUser();
+
+}
+
+
+
+/* =========================================================
+   AUTH STATE LISTENER
+========================================================= */
+
+supabase.auth.onAuthStateChange(
+    async (
+        event,
+        session
+    ) => {
+
+        if (session) {
+
+            await loadUser();
+
+        }
+
+    }
+);
+
+
 </script>
 
+
 </body>
+
 </html>
