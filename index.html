@@ -500,6 +500,65 @@ header {
 }
 
 /* =========================
+   LEADERBOARD REDESIGN
+========================= */
+.leaderboard-intro { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; color:#a5a5b8; font-size:13px; }
+.leaderboard-week-chip { border:1px solid #49316e; background:#211632; color:#d9c2ff; border-radius:999px; padding:7px 11px; font-weight:700; white-space:nowrap; }
+.podium-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; margin:10px 0 24px; }
+.podium-card { position:relative; text-align:center; padding:18px 10px 16px; border:1px solid #343044; border-radius:16px; background:linear-gradient(180deg,#211a31,#171722 72%); min-width:0; }
+.podium-card.podium-first { order:2; min-height:190px; border-color:#9368df; background:linear-gradient(180deg,#35224f,#191724 80%); box-shadow:0 10px 35px rgba(139,83,231,.13); }
+.podium-card.podium-second { order:1; min-height:158px; }
+.podium-card.podium-third { order:3; min-height:142px; }
+.podium-medal { font-size:26px; margin-bottom:8px; }
+.podium-rank { color:#a9a3bc; font-size:11px; font-weight:800; letter-spacing:1.4px; text-transform:uppercase; }
+.podium-name { margin:9px 0 7px; font-weight:800; font-size:14px; overflow-wrap:anywhere; }
+.podium-name.is-you { color:#d4b7ff; }
+.podium-score { font-size:22px; font-weight:900; color:#c59aff; }
+.podium-score-label { color:#9692a7; font-size:11px; margin-top:3px; }
+.podium-you { display:inline-block; margin-top:8px; border-radius:999px; padding:4px 8px; background:#38234f; color:#e2ccff; font-size:10px; font-weight:800; }
+.leaderboard-list-heading { color:#aaa6ba; font-size:12px; text-transform:uppercase; letter-spacing:1.2px; font-weight:800; margin:4px 0 8px; }
+.leader-row { display:grid; grid-template-columns:46px minmax(0,1fr) 110px 105px; align-items:center; gap:10px; padding:14px 12px; border:1px solid transparent; border-bottom-color:#292937; border-radius:10px; }
+.leader-row:last-child { border-bottom-color:transparent; }
+.leader-row.is-you { background:#21172f; border-color:#54367d; }
+.rank-bubble { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; background:#242433; color:#b7b4c9; font-weight:900; font-size:12px; }
+.leader-row.is-you .rank-bubble { background:#6c3eb0; color:#fff; }
+.leader-name { font-weight:750; overflow-wrap:anywhere; }
+.leader-score { text-align:right; color:#c59aff; font-weight:850; }
+.leader-status { text-align:right; font-size:12px; color:#9996aa; }
+.your-standing { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:18px; padding:14px 16px; border-radius:13px; border:1px solid #65439a; background:linear-gradient(100deg,#2a1b3e,#191722); }
+.your-standing-label { color:#bdb1d6; font-size:12px; margin-bottom:4px; }
+.your-standing-rank { font-size:22px; font-weight:900; color:#e1caff; }
+.your-standing-total { text-align:right; font-size:18px; font-weight:900; color:#c59aff; }
+.your-standing-total small { display:block; font-size:11px; color:#a49bb6; font-weight:500; }
+
+/* =========================
+   REVISION TRACKER
+========================= */
+.revision-intro { color:#9c9caf; font-size:13px; line-height:1.6; margin-bottom:18px; }
+.revision-form { display:grid; grid-template-columns:1fr 1.5fr auto; gap:10px; align-items:end; margin-bottom:18px; }
+.revision-field label { display:block; color:#aaaabd; font-size:12px; margin-bottom:7px; }
+.revision-field input,.revision-field select { width:100%; min-width:0; padding:12px; color:#f5f5f7; background:#101018; border:1px solid #373749; border-radius:10px; outline:none; }
+.revision-field input:focus,.revision-field select:focus { border-color:#9b5cff; }
+.revision-add-btn { padding:12px 15px; border:0; border-radius:10px; background:#8f4cff; color:white; font-weight:800; white-space:nowrap; }
+.revision-overview { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:14px 0 18px; }
+.revision-stat { border:1px solid #2e2e40; border-radius:12px; padding:13px; background:#11111b; }
+.revision-stat strong { display:block; color:#d2b4ff; font-size:22px; }
+.revision-stat span { color:#9696aa; font-size:11px; }
+.revision-item { border:1px solid #2b2b3b; border-radius:14px; background:#11111a; padding:15px; margin-top:11px; }
+.revision-item-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
+.revision-chapter { font-weight:800; font-size:15px; overflow-wrap:anywhere; }
+.revision-subject { color:#b9a0df; font-size:12px; margin-top:5px; }
+.revision-delete { border:1px solid #55303a; background:#24151a; color:#ffabb5; border-radius:8px; padding:7px 9px; font-size:12px; }
+.revision-progress-line { height:6px; background:#2b2b3a; border-radius:999px; overflow:hidden; margin:10px 0 13px; }
+.revision-progress-fill { height:100%; background:linear-gradient(90deg,#8f4cff,#55d6b0); border-radius:999px; transition:width .2s ease; }
+.revision-checklist { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+.revision-check { display:flex; align-items:flex-start; gap:9px; padding:10px; border-radius:10px; background:#191923; color:#c8c8d5; font-size:12px; line-height:1.4; cursor:pointer; }
+.revision-check input { accent-color:#a970ff; margin-top:2px; flex:0 0 auto; }
+.revision-check.is-done { color:#91e4bb; background:#14241f; }
+.revision-empty { padding:20px 8px; text-align:center; color:#9292a5; font-size:13px; }
+.revision-message { min-height:18px; color:#9de8b2; font-size:12px; margin:8px 0; }
+
+/* =========================
    HISTORY
 ========================= */
 
@@ -624,6 +683,24 @@ header {
     .log-summary-grid { grid-template-columns: 1fr; }
     .log-record-top { flex-direction: column; }
 }
+
+@media (max-width: 650px) {
+    .leaderboard-intro { align-items:flex-start; flex-direction:column; }
+    .podium-grid { gap:7px; }
+    .podium-card { padding:14px 6px 12px; }
+    .podium-card.podium-first { min-height:166px; }
+    .podium-card.podium-second { min-height:142px; }
+    .podium-card.podium-third { min-height:128px; }
+    .podium-name { font-size:12px; }
+    .podium-score { font-size:18px; }
+    .leader-row { grid-template-columns:34px minmax(0,1fr) 75px; padding:12px 6px; gap:7px; }
+    .leader-status { display:none; }
+    .revision-form { grid-template-columns:1fr; }
+    .revision-add-btn { width:100%; }
+    .revision-overview { grid-template-columns:1fr; }
+    .revision-checklist { grid-template-columns:1fr; }
+}
+
 </style>
 </head>
 
@@ -1010,6 +1087,35 @@ header {
             </div>
         </div>
 
+
+        <!-- =================================================
+             CHAPTER REVISION TRACKER
+        ================================================= -->
+        <div class="section" id="revisionTrackerSection">
+            <div class="section-heading">🧠 Chapter Revision Tracker</div>
+            <div class="card">
+                <p class="revision-intro">Track each chapter through theory, question practice, JEE Advanced practice, Revision 1 and Revision 2. Your checklist is saved to your QLeague account.</p>
+                <form class="revision-form" id="revisionForm" onsubmit="addRevisionChapter(event)">
+                    <div class="revision-field">
+                        <label for="revisionSubject">Subject</label>
+                        <select id="revisionSubject" required>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="revision-field">
+                        <label for="revisionChapterName">Chapter name</label>
+                        <input id="revisionChapterName" type="text" maxlength="160" placeholder="e.g. Laws of Motion" required>
+                    </div>
+                    <button class="revision-add-btn" type="submit">+ Add Chapter</button>
+                </form>
+                <div id="revisionMessage" class="revision-message" role="status"></div>
+                <div id="revisionOverview" class="revision-overview"></div>
+                <div id="revisionChapterList"><div class="revision-empty">Loading revision tracker…</div></div>
+            </div>
+        </div>
 
         <!-- =================================================
              LEADERBOARD
@@ -1828,7 +1934,8 @@ async function loadDashboard() {
         loadMyStats(),
         loadLeaderboard(),
         loadHistory(),
-        loadQuestionLogs()
+        loadQuestionLogs(),
+        loadRevisionChapters()
     ]);
 
 }
@@ -2293,6 +2400,129 @@ window.loadQuestionLogs = async function() {
 
 
 /* =========================================================
+   CHAPTER REVISION TRACKER
+========================================================= */
+const REVISION_STAGES = [
+    { key: "theory_completed", label: "Theory completed" },
+    { key: "questions_completed", label: "Question practice completed" },
+    { key: "advanced_completed", label: "JEE Advanced practice completed" },
+    { key: "revision_1_completed", label: "Revision 1 completed" },
+    { key: "revision_2_completed", label: "Revision 2 completed" }
+];
+
+window.addRevisionChapter = async function(event) {
+    if (event) event.preventDefault();
+    if (!currentUser) return;
+    const subject = document.getElementById("revisionSubject").value.trim();
+    const chapter = document.getElementById("revisionChapterName").value.trim();
+    const message = document.getElementById("revisionMessage");
+    if (!subject || !chapter) {
+        message.textContent = "Choose a subject and enter a chapter name.";
+        return;
+    }
+
+    const { error } = await supabase.from("revision_chapters").insert({
+        user_id: currentUser.id,
+        subject,
+        chapter_name: chapter
+    });
+
+    if (error) {
+        console.error(error);
+        message.textContent = error.code === "23505"
+            ? "That chapter is already in your tracker for this subject."
+            : "Could not add chapter. Check that the revision tracker SQL setup has been run.";
+        return;
+    }
+
+    document.getElementById("revisionChapterName").value = "";
+    message.textContent = "Chapter added — start checking off your progress.";
+    await loadRevisionChapters();
+};
+
+window.updateRevisionStage = async function(id, field, checked) {
+    if (!currentUser || !REVISION_STAGES.some(stage => stage.key === field)) return;
+    const { error } = await supabase.from("revision_chapters")
+        .update({ [field]: checked, updated_at: new Date().toISOString() })
+        .eq("id", id)
+        .eq("user_id", currentUser.id);
+    if (error) {
+        console.error(error);
+        alert("Could not update revision progress. Please try again.");
+        await loadRevisionChapters();
+        return;
+    }
+    await loadRevisionChapters();
+};
+
+window.deleteRevisionChapter = async function(id) {
+    if (!currentUser) return;
+    if (!confirm("Remove this chapter from your revision tracker?")) return;
+    const { error } = await supabase.from("revision_chapters")
+        .delete().eq("id", id).eq("user_id", currentUser.id);
+    if (error) {
+        console.error(error);
+        alert("Could not remove this chapter. Please try again.");
+        return;
+    }
+    await loadRevisionChapters();
+};
+
+async function loadRevisionChapters() {
+    if (!currentUser) return;
+    const list = document.getElementById("revisionChapterList");
+    const overview = document.getElementById("revisionOverview");
+    if (!list || !overview) return;
+
+    const { data, error } = await supabase.from("revision_chapters")
+        .select("id, subject, chapter_name, theory_completed, questions_completed, advanced_completed, revision_1_completed, revision_2_completed, created_at, updated_at")
+        .eq("user_id", currentUser.id)
+        .order("subject", { ascending: true })
+        .order("chapter_name", { ascending: true });
+
+    if (error) {
+        console.error(error);
+        overview.innerHTML = "";
+        list.innerHTML = '<div class="revision-empty">Could not load tracker. Run the QLeague revision tracker SQL setup in Supabase, then refresh this page.</div>';
+        return;
+    }
+
+    const rows = data || [];
+    const completedStages = rows.reduce((sum, row) => sum + REVISION_STAGES.filter(stage => row[stage.key]).length, 0);
+    const totalStages = rows.length * REVISION_STAGES.length;
+    const completedChapters = rows.filter(row => REVISION_STAGES.every(stage => row[stage.key])).length;
+    overview.innerHTML = `
+        <div class="revision-stat"><strong>${rows.length}</strong><span>Chapters tracked</span></div>
+        <div class="revision-stat"><strong>${completedChapters}</strong><span>Chapters fully completed</span></div>
+        <div class="revision-stat"><strong>${totalStages ? Math.round(completedStages / totalStages * 100) : 0}%</strong><span>Overall revision progress</span></div>`;
+
+    if (!rows.length) {
+        list.innerHTML = '<div class="revision-empty">No chapters yet. Add your first chapter above to start tracking your preparation.</div>';
+        return;
+    }
+
+    list.innerHTML = rows.map(row => {
+        const done = REVISION_STAGES.filter(stage => row[stage.key]).length;
+        const percent = Math.round(done / REVISION_STAGES.length * 100);
+        const checklist = REVISION_STAGES.map(stage => `
+            <label class="revision-check ${row[stage.key] ? "is-done" : ""}">
+                <input type="checkbox" ${row[stage.key] ? "checked" : ""} onchange="updateRevisionStage(${Number(row.id)}, '${stage.key}', this.checked)">
+                <span>${stage.label}</span>
+            </label>`).join("");
+        return `
+            <article class="revision-item">
+                <div class="revision-item-top">
+                    <div><div class="revision-chapter">${escapeHTML(row.chapter_name)}</div><div class="revision-subject">${escapeHTML(row.subject)} · ${done}/5 stages completed</div></div>
+                    <button class="revision-delete" onclick="deleteRevisionChapter(${Number(row.id)})" type="button">Remove</button>
+                </div>
+                <div class="revision-progress-line"><div class="revision-progress-fill" style="width:${percent}%"></div></div>
+                <div class="revision-checklist">${checklist}</div>
+            </article>`;
+    }).join("");
+}
+
+
+/* =========================================================
    LEADERBOARD
 ========================================================= */
 
@@ -2393,117 +2623,58 @@ async function loadLeaderboard() {
    RENDER LEADERBOARD
 ========================================================= */
 
-function renderLeaderboard(
-    leaderboard
-) {
-
-    const container =
-        document.getElementById(
-            "leaderboard"
-        );
-
-
+function renderLeaderboard(leaderboard) {
+    const container = document.getElementById("leaderboard");
     if (!leaderboard.length) {
-
-        container.innerHTML =
-            `<div class="empty">
-                No players yet.
-            </div>`;
-
+        container.innerHTML = '<div class="empty">No players yet. Be the first to climb the ranks!</div>';
         return;
     }
 
+    const myIndex = leaderboard.findIndex(player => player.id === currentUser.id);
+    const myPlayer = myIndex >= 0 ? leaderboard[myIndex] : null;
+    const topThree = leaderboard.slice(0, 3);
+    const medals = ["🥇", "🥈", "🥉"];
+    const podiumClasses = ["podium-first", "podium-second", "podium-third"];
 
-    const myTotal =
-        leaderboard.find(
-            player =>
-                player.id === currentUser.id
-        )?.total || 0;
+    const podium = topThree.map((player, index) => `
+        <div class="podium-card ${podiumClasses[index]}">
+            <div class="podium-medal">${medals[index]}</div>
+            <div class="podium-rank">${index === 0 ? "1st place" : index === 1 ? "2nd place" : "3rd place"}</div>
+            <div class="podium-name ${player.id === currentUser.id ? "is-you" : ""}">${escapeHTML(player.username)}${player.id === currentUser.id ? " ⭐" : ""}</div>
+            <div class="podium-score">${Number(player.total).toLocaleString()}</div>
+            <div class="podium-score-label">questions this week</div>
+            ${player.id === currentUser.id ? '<span class="podium-you">YOUR RANK</span>' : ""}
+        </div>`).join("");
 
+    const rest = leaderboard.slice(3).map((player, index) => {
+        let status = "Tied";
+        if (player.id === currentUser.id) status = "You";
+        else if (myPlayer && player.total > myPlayer.total) status = `${Number(player.total - myPlayer.total).toLocaleString()} ahead`;
+        else if (myPlayer && player.total < myPlayer.total) status = `${Number(myPlayer.total - player.total).toLocaleString()} behind`;
+        return `
+            <div class="leader-row ${player.id === currentUser.id ? "is-you" : ""}">
+                <div class="rank-bubble">#${index + 4}</div>
+                <div class="leader-name">${escapeHTML(player.username)}${player.id === currentUser.id ? " ⭐" : ""}</div>
+                <div class="leader-score">${Number(player.total).toLocaleString()}</div>
+                <div class="leader-status">${status}</div>
+            </div>`;
+    }).join("");
 
-    container.innerHTML =
-        leaderboard
-        .map(
-            (player, index) => {
+    const youInTopThree = myIndex >= 0 && myIndex < 3;
+    const myStanding = myPlayer && !youInTopThree ? `
+        <div class="your-standing">
+            <div><div class="your-standing-label">YOUR CURRENT POSITION</div><div class="your-standing-rank">#${myIndex + 1}</div></div>
+            <div class="your-standing-total">${Number(myPlayer.total).toLocaleString()}<small>questions this week</small></div>
+        </div>` : "";
 
-                let status = "";
-
-
-                if (
-                    player.id ===
-                    currentUser.id
-                ) {
-
-                    status =
-                        "You";
-
-                }
-                else if (
-                    player.total >
-                    myTotal
-                ) {
-
-                    status =
-                        (player.total -
-                        myTotal) +
-                        " ahead";
-
-                }
-                else if (
-                    player.total <
-                    myTotal
-                ) {
-
-                    status =
-                        (myTotal -
-                        player.total) +
-                        " behind";
-
-                }
-                else {
-
-                    status =
-                        "Tied";
-
-                }
-
-
-                return `
-
-                <div class="leader-row">
-
-                    <div class="rank">
-                        #${index + 1}
-                    </div>
-
-                    <div class="leader-name">
-                        ${escapeHTML(
-                            player.username
-                        )}
-                        ${
-                            player.id ===
-                            currentUser.id
-                                ? " ⭐"
-                                : ""
-                        }
-                    </div>
-
-                    <div class="leader-score">
-                        ${player.total}
-                    </div>
-
-                    <div class="leader-status">
-                        ${status}
-                    </div>
-
-                </div>
-
-                `;
-
-            }
-        )
-        .join("");
-
+    container.innerHTML = `
+        <div class="leaderboard-intro">
+            <span>Every question counts. Keep climbing this week's rankings.</span>
+            <span class="leaderboard-week-chip">⚡ WEEKLY RACE</span>
+        </div>
+        ${topThree.length ? `<div class="podium-grid">${podium}</div>` : ""}
+        ${leaderboard.length > 3 ? `<div class="leaderboard-list-heading">Full standings</div>${rest}` : ""}
+        ${myStanding}`;
 }
 
 
