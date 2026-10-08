@@ -1,11 +1,747 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>QLeague</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QLeague | Solve More. Climb Higher.</title>
+
+<style>
+
+/* ==============================
+   RESET
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0d12;
+    color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* ==============================
+   HEADER
+================================= */
+
+.header {
+    width: 100%;
+    padding: 22px 7%;
+    border-bottom: 1px solid #242832;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #7c5cff;
+}
+
+.tagline {
+    color: #858b98;
+    font-size: 13px;
+}
+
+/* ==============================
+   MAIN
+================================= */
+
+.container {
+    width: 86%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+/* ==============================
+   WELCOME
+================================= */
+
+.welcome {
+    margin-bottom: 30px;
+}
+
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.welcome p {
+    color: #858b98;
+}
+
+/* ==============================
+   STATS
+================================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #12151c;
+    border: 1px solid #242832;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.card-title {
+    color: #858b98;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.big-number {
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.small-text {
+    color: #858b98;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+/* ==============================
+   QUESTION INPUT
+================================= */
+
+.question-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.question-input input {
+    flex: 1;
+    padding: 14px;
+    background: #0b0d12;
+    border: 1px solid #303541;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.question-input input:focus {
+    border-color: #7c5cff;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-weight: 700;
+    color: white;
+    background: #7c5cff;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+/* ==============================
+   TARGETS
+================================= */
+
+.targets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.target-card {
+    background: #12151c;
+    border: 1px solid #242832;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.target-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.target-header h2 {
+    font-size: 18px;
+}
+
+.target-number {
+    color: #858b98;
+    font-size: 14px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #252933;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 82%;
+    background: #7c5cff;
+    border-radius: 20px;
+    transition: width 0.4s;
+}
+
+.progress.month {
+    width: 84%;
+}
+
+.remaining {
+    margin-top: 12px;
+    color: #858b98;
+    font-size: 13px;
+}
+
+/* ==============================
+   LEADERBOARD
+================================= */
+
+.leaderboard {
+    background: #12151c;
+    border: 1px solid #242832;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 25px;
+}
+
+.leaderboard h2 {
+    margin-bottom: 20px;
+}
+
+.player {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    align-items: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid #242832;
+}
+
+.player:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: 800;
+    color: #858b98;
+}
+
+.player-name {
+    font-weight: 700;
+}
+
+.player-questions {
+    font-weight: 700;
+}
+
+.you {
+    background: #181522;
+    border-radius: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.you .player-name {
+    color: #9b83ff;
+}
+
+/* ==============================
+   HISTORY
+================================= */
+
+.history {
+    background: #12151c;
+    border: 1px solid #242832;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.history h2 {
+    margin-bottom: 20px;
+}
+
+.history-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid #242832;
+}
+
+.history-row:last-child {
+    border-bottom: none;
+}
+
+.date {
+    color: #858b98;
+}
+
+.questions {
+    font-weight: 700;
+}
+
+/* ==============================
+   FOOTER
+================================= */
+
+footer {
+    text-align: center;
+    padding: 35px;
+    color: #555b68;
+    font-size: 13px;
+}
+
+/* ==============================
+   MOBILE
+================================= */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 18px 5%;
+    }
+
+    .tagline {
+        display: none;
+    }
+
+    .container {
+        width: 92%;
+        margin: 25px auto;
+    }
+
+    .welcome h1 {
+        font-size: 27px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .targets {
+        grid-template-columns: 1fr;
+    }
+
+    .question-input {
+        flex-direction: column;
+    }
+
+    .question-input button {
+        width: 100%;
+    }
+
+}
+
+</style>
 </head>
 
+
 <body>
-    <h1>QLeague</h1>
-    <p>Question tracking starts here.</p>
+
+<!-- ==============================
+     HEADER
+================================= -->
+
+<header class="header">
+
+    <div class="logo">
+        Q<span>League</span>
+    </div>
+
+    <div class="tagline">
+        Solve More. Climb Higher.
+    </div>
+
+</header>
+
+
+<!-- ==============================
+     MAIN
+================================= -->
+
+<main class="container">
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <h1>Welcome, RankForge 👋</h1>
+
+        <p>
+            Keep solving. Keep climbing.
+        </p>
+
+    </section>
+
+
+    <!-- ==============================
+         TOP STATS
+    ================================= -->
+
+    <section class="stats">
+
+        <!-- TODAY -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Today's Questions
+            </div>
+
+            <div class="big-number" id="todayQuestions">
+                73
+            </div>
+
+            <div class="small-text">
+                questions solved today
+            </div>
+
+            <div class="question-input">
+
+                <input
+                    type="number"
+                    id="questionInput"
+                    placeholder="Add questions"
+                    min="1"
+                >
+
+                <button onclick="addQuestions()">
+                    + Add
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STREAK -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Current Streak
+            </div>
+
+            <div class="big-number">
+                🔥 6
+            </div>
+
+            <div class="small-text">
+                consecutive days
+            </div>
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="card">
+
+            <div class="card-title">
+                All-Time Questions
+            </div>
+
+            <div class="big-number" id="allTimeQuestions">
+                1847
+            </div>
+
+            <div class="small-text">
+                questions solved
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         TARGETS
+    ================================= -->
+
+    <section class="targets">
+
+
+        <!-- WEEKLY -->
+
+        <div class="target-card">
+
+            <div class="target-header">
+
+                <h2>Weekly Target</h2>
+
+                <div class="target-number">
+                    <span id="weeklyQuestions">412</span> /
+                    <span id="weeklyTarget">500</span>
+                </div>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress"
+                    id="weeklyProgress">
+                </div>
+
+            </div>
+
+            <div class="remaining" id="weeklyRemaining">
+                88 questions remaining
+            </div>
+
+        </div>
+
+
+        <!-- MONTHLY -->
+
+        <div class="target-card">
+
+            <div class="target-header">
+
+                <h2>Monthly Target</h2>
+
+                <div class="target-number">
+                    <span id="monthlyQuestions">1684</span> /
+                    <span id="monthlyTarget">2000</span>
+                </div>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress month"
+                    id="monthlyProgress">
+                </div>
+
+            </div>
+
+            <div class="remaining" id="monthlyRemaining">
+                316 questions remaining
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         LEADERBOARD
+    ================================= -->
+
+    <section class="leaderboard">
+
+        <h2>🏆 Weekly Leaderboard</h2>
+
+
+        <div class="player">
+
+            <div class="rank">1</div>
+
+            <div class="player-name">
+                Arjun
+            </div>
+
+            <div class="player-questions">
+                587
+            </div>
+
+        </div>
+
+
+        <div class="player">
+
+            <div class="rank">2</div>
+
+            <div class="player-name">
+                Rohan
+            </div>
+
+            <div class="player-questions">
+                541
+            </div>
+
+        </div>
+
+
+        <div class="player you">
+
+            <div class="rank">3</div>
+
+            <div class="player-name">
+                You
+            </div>
+
+            <div class="player-questions">
+                512
+            </div>
+
+        </div>
+
+
+        <div class="player">
+
+            <div class="rank">4</div>
+
+            <div class="player-name">
+                Aditya
+            </div>
+
+            <div class="player-questions">
+                398
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ==============================
+         HISTORY
+    ================================= -->
+
+    <section class="history">
+
+        <h2>📊 Recent History</h2>
+
+
+        <div class="history-row">
+
+            <div class="date">
+                Today
+            </div>
+
+            <div class="questions">
+                73 questions
+            </div>
+
+        </div>
+
+
+        <div class="history-row">
+
+            <div class="date">
+                Yesterday
+            </div>
+
+            <div class="questions">
+                91 questions
+            </div>
+
+        </div>
+
+
+        <div class="history-row">
+
+            <div class="date">
+                Monday
+            </div>
+
+            <div class="questions">
+                67 questions
+            </div>
+
+        </div>
+
+
+        <div class="history-row">
+
+            <div class="date">
+                Sunday
+            </div>
+
+            <div class="questions">
+                82 questions
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    QLeague © 2026 · Solve More. Climb Higher.
+
+</footer>
+
+
+<!-- ==============================
+     JAVASCRIPT
+================================= -->
+
+<script>
+
+let todayQuestions = 73;
+let allTimeQuestions = 1847;
+
+function addQuestions() {
+
+    const input =
+        document.getElementById("questionInput");
+
+    const amount =
+        parseInt(input.value);
+
+    if (!amount || amount <= 0) {
+
+        alert("Enter a valid number of questions.");
+
+        return;
+    }
+
+
+    todayQuestions += amount;
+
+    allTimeQuestions += amount;
+
+
+    document.getElementById("todayQuestions")
+        .textContent = todayQuestions;
+
+    document.getElementById("allTimeQuestions")
+        .textContent = allTimeQuestions;
+
+
+    input.value = "";
+
+
+    alert(
+        amount +
+        " questions added successfully!"
+    );
+
+}
+
+</script>
+
 </body>
 </html>
